@@ -167,7 +167,7 @@
     .score-denom { font-family: var(--fb); font-size: 22px; font-weight: 400; color: rgba(255,255,255,0.5); }
     .score-label { font-family: var(--fh); font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
     .score-sep { width: 1px; height: 72px; background: rgba(255,255,255,0.15); flex-shrink: 0; }
-    .score-body { flex: 1; min-width: 0; position: relative; z-index: 1; }
+    .score-body { flex: 1; min-width: 240px; position: relative; z-index: 1; }
     .score-body h3 { font-family: var(--fh); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
     .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .sg { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 16px; transition: background 0.2s; }
@@ -253,11 +253,11 @@
       background: radial-gradient(circle, rgba(245,130,10,0.1) 0%, transparent 65%);
       pointer-events: none;
     }
-    .xto-value-left { flex: 1; min-width: 0; position: relative; z-index: 1; }
+    .xto-value-left { flex: 1; min-width: 240px; position: relative; z-index: 1; }
     .xto-eyebrow { font-family: var(--fh); font-size: 11px; font-weight: 700; background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px; display: block; }
     .xto-value h3 { font-family: var(--fdisp); font-size: clamp(20px, 2.8vw, 28px); font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 16px; letter-spacing: -0.01em; }
     .xto-value p { font-family: var(--fb); font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.78); line-height: 1.8; }
-    .xto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-shrink: 0; min-width: 0; width: 100%; max-width: 320px; position: relative; z-index: 1; }
+    .xto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-shrink: 0; min-width: 268px; position: relative; z-index: 1; }
     .xto-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 18px 20px; backdrop-filter: blur(4px); transition: background 0.2s; }
     .xto-card:hover { background: rgba(255,255,255,0.1); }
     .xto-card .xc-title { font-family: var(--fh); font-size: 14px; font-weight: 800; background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 5px; }
@@ -429,13 +429,6 @@
        RESPONSIVE
     ══════════════════════════════ */
 
-    /* ── prevent ALL horizontal scroll at root ── */
-    html, body { max-width: 100%; overflow-x: hidden; }
-
-    /* Nav label switching */
-    .nb-short { display: none; }
-    .nb-full { display: inline; }
-
     /* ── Tablet landscape (≤1100px) ── */
     @media (max-width: 1100px) {
       .wg { grid-template-columns: 1fr 1fr; }
@@ -456,12 +449,11 @@
       .a-stats { grid-template-columns: 1fr 1fr; margin: 0 -24px; }
       .a-body { padding: 36px 20px 60px; }
 
-      /* Score banner — stack vertically, fix overflow */
-      .score-banner { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 24px; }
+      /* Score banner */
+      .score-banner { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 28px; }
       .score-sep { display: none; }
       .score-main { display: flex; align-items: center; gap: 16px; }
       .score-grid { grid-template-columns: repeat(3, 1fr); }
-      .score-body { width: 100%; min-width: 0; }
 
       /* Issue grid */
       .ig { grid-template-columns: 1fr; }
@@ -483,9 +475,8 @@
       /* Compare hero */
       .c-hero { padding: 40px 24px 36px; }
 
-      /* Compare tabs — left-align on tablet, scroll if needed */
-      .itabs { justify-content: flex-start; }
-      .itb { padding: 16px 18px; font-size: 12px; }
+      /* Compare tabs */
+      .itb { padding: 16px 20px; font-size: 12px; }
 
       /* Pane */
       .pane { padding: 36px 20px 60px; }
@@ -506,154 +497,99 @@
     /* ── Mobile (≤600px) ── */
     @media (max-width: 600px) {
       /* Nav */
-      .nav { padding: 0 14px; min-height: 52px; }
-      .nav-logo { margin-right: 10px; }
+      .nav { padding: 0 16px; min-height: 54px; }
       .nav-brand { font-size: 14px; }
-      .nav-sep { margin-right: 2px; }
-      .nb { padding: 15px 10px; font-size: 11.5px; }
+      .nb { padding: 16px 10px; font-size: 11.5px; }
+      .nav-sep { margin-right: 4px; }
 
       /* Audit hero */
-      .a-hero { padding: 28px 16px 0; }
+      .a-hero { padding: 32px 16px 0; }
       .a-stats { margin: 0 -16px; grid-template-columns: 1fr 1fr; }
-      .a-stat { padding: 16px 10px; }
-      .a-stat .n { font-size: 22px; }
-      .a-stat .l { font-size: 10px; letter-spacing: 0.04em; }
-      .a-body { padding: 24px 16px 48px; }
-      .a-hero h1 { font-size: clamp(26px, 8vw, 40px); margin-bottom: 12px; }
-      .a-hero-sub { font-size: 13.5px; margin-bottom: 32px; }
-      .a-pills { gap: 6px; margin-bottom: 18px; }
-      .a-pill { font-size: 10.5px; padding: 4px 11px; }
+      .a-stat { padding: 16px 12px; }
+      .a-stat .n { font-size: 24px; }
+      .a-stat .l { font-size: 10px; }
+      .a-body { padding: 28px 16px 48px; }
+      .a-hero h1 { font-size: clamp(28px, 8vw, 42px); }
+      .a-hero-sub { font-size: 14px; margin-bottom: 36px; }
 
-      /* Score banner — compact mobile layout */
-      .score-banner { padding: 20px 16px; border-radius: 16px; gap: 16px; margin-bottom: 32px; }
-      .score-num { font-size: 48px; }
-      .score-label { font-size: 10px; }
-      .score-grid { grid-template-columns: repeat(3, 1fr); gap: 7px; }
-      .sg { padding: 10px 8px; border-radius: 10px; }
-      .sg .sn { font-size: 17px; }
-      .sg .sl { font-size: 10px; }
+      /* Score banner */
+      .score-banner { padding: 22px 18px; border-radius: 16px; }
+      .score-num { font-size: 52px; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .sg { padding: 10px 12px; }
+      .sg .sn { font-size: 18px; }
 
       /* Diagnosis */
-      .diag { padding: 18px 16px; border-radius: 14px; gap: 10px; margin-bottom: 32px; }
+      .diag { padding: 18px 16px; border-radius: 14px; }
       .diag p { font-size: 13.5px; }
-      .diag-tags { gap: 6px; margin-top: 14px; }
-      .dtag { font-size: 10.5px; padding: 3px 9px; }
-
-      /* Section headers */
-      .sh { margin-bottom: 20px; gap: 10px; }
-      .sh-icon { width: 34px; height: 34px; font-size: 15px; border-radius: 10px; }
-      .sh-text h2 { font-size: 16px; }
-      .sh-text p { font-size: 11.5px; }
 
       /* Issue cards */
-      .ig { gap: 14px; margin-bottom: 32px; }
-      .ic { padding: 18px 16px; border-radius: 14px; }
-      .ic-ico { width: 36px; height: 36px; font-size: 16px; border-radius: 10px; }
+      .ic { padding: 20px; border-radius: 16px; }
       .ic h4 { font-size: 13px; }
       .ic p { font-size: 13px; }
-      .cap-box { padding: 16px 18px; }
-      .cap-num { width: 22px; height: 22px; font-size: 10px; }
-      .cap-text { font-size: 12.5px; }
-
-      /* Mix bars */
-      .mi-bar { width: 72px; }
-      .mi-lbl { font-size: 12px; }
-      .mi-pct { font-size: 10.5px; width: 30px; }
 
       /* xto value box */
-      .xto-value { padding: 20px 16px; border-radius: 16px; gap: 20px; margin-bottom: 32px; }
+      .xto-value { padding: 22px 18px; border-radius: 18px; }
       .xto-grid { grid-template-columns: 1fr 1fr; }
-      .xto-card { padding: 14px 14px; border-radius: 12px; }
-      .xto-card .xc-title { font-size: 13px; }
-      .xto-card .xc-sub { font-size: 11.5px; }
 
       /* Win cards */
-      .wg { grid-template-columns: 1fr; gap: 14px; margin-bottom: 32px; }
-      .wc { padding: 20px 16px 16px; border-radius: 16px; }
-      .wc .wn { font-size: 32px; }
-      .wc h4 { font-size: 13px; }
-      .wc p { font-size: 12.5px; }
-      .wc .tip { font-size: 12px; }
-
-      /* Table */
-      .tbl-wrap { margin-bottom: 32px; border-radius: 14px; }
+      .wg { grid-template-columns: 1fr; }
+      .wc { padding: 22px 18px 18px; }
 
       /* Action plan */
       .pg { grid-template-columns: 1fr; }
-      .pc-hd { font-size: 11px; padding: 16px 18px; }
-      .pc-body { padding: 16px 18px; }
-      .pi p { font-size: 12.5px; }
 
       /* Compare hero */
-      .c-hero { padding: 28px 16px 24px; }
-      .c-hero h1 { font-size: clamp(22px, 7vw, 34px); margin-bottom: 10px; }
-      .c-hero > p { font-size: 13.5px; }
-      .c-eyebrow { font-size: 10.5px; padding: 6px 14px; margin-bottom: 14px; }
-      .c-pills { gap: 6px; margin-top: 18px; }
-      .cp { font-size: 11px; padding: 4px 11px; }
+      .c-hero { padding: 30px 16px 28px; }
+      .c-hero h1 { font-size: clamp(24px, 7vw, 38px); }
 
-      /* Compare tabs — left-align, compact, scroll */
-      .itabs { justify-content: flex-start; }
-      .itb { padding: 13px 14px; font-size: 11.5px; white-space: nowrap; flex-shrink: 0; }
+      /* Compare tabs */
+      .itb { padding: 14px 14px; font-size: 11.5px; }
 
       /* Pane */
-      .pane { padding: 22px 16px 48px; }
-      .p-intro { margin-bottom: 28px; }
-      .p-intro h2 { font-size: 20px; }
-      .p-intro p { font-size: 13px; }
+      .pane { padding: 24px 16px 48px; }
+      .p-intro h2 { font-size: 22px; }
+      .p-intro p { font-size: 13.5px; }
 
       /* Compare card */
-      .cc { border-radius: 16px; }
-      .cc-hd { padding: 16px 18px; gap: 12px; }
-      .cc-num { width: 32px; height: 32px; font-size: 13px; flex-shrink: 0; }
-      .cc-hd-text h3 { font-size: 13px; line-height: 1.4; }
-      .cc-hd-text p { font-size: 11px; }
-      .cc-col { padding: 16px 14px; }
-      .lbl-orig, .lbl-ours { font-size: 10px; padding: 4px 10px; margin-bottom: 12px; }
-      .our-star { font-size: 9.5px; padding: 3px 9px; }
-      .diff-bar { padding: 18px 14px; }
-      .diff-bar h4 { font-size: 10px; margin-bottom: 16px; }
+      .cc { border-radius: 18px; }
+      .cc-hd { padding: 18px 20px; gap: 14px; }
+      .cc-num { width: 34px; height: 34px; font-size: 14px; }
+      .cc-hd-text h3 { font-size: 13.5px; }
+      .cc-hd-text p { font-size: 11.5px; }
+      .cc-col { padding: 18px 16px; }
+      .diff-bar { padding: 20px 16px; }
       .dg { grid-template-columns: 1fr; gap: 14px; }
-      .di-ico { width: 30px; height: 30px; border-radius: 8px; }
-      .di-ico svg { width: 14px; height: 14px; }
       .di strong { font-size: 12.5px; }
       .di span { font-size: 12px; }
 
       /* Overview */
-      .ov-stats { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-      .os { padding: 16px 12px; border-radius: 12px; }
-      .os .n { font-size: 28px; }
-      .os .l { font-size: 11px; }
-      .ov-tbl-wrap { border-radius: 12px; }
+      .ov-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .os { padding: 18px 14px; border-radius: 14px; }
+      .os .n { font-size: 32px; }
+
+      /* Section headers */
+      .sh-text h2 { font-size: 17px; }
+      .sh-text p { font-size: 12px; }
+      .sh-icon { width: 36px; height: 36px; font-size: 16px; border-radius: 10px; }
     }
 
     /* ── Small mobile (≤400px) ── */
     @media (max-width: 400px) {
-      .nav { padding: 0 10px; }
-      .nav-logo { margin-right: 6px; }
-      .nav-logo img { width: 28px; height: 28px; }
-      .nav-brand { display: none; }
-      .nav-sep { display: none; }
-      .nb { padding: 14px 10px; font-size: 11.5px; }
-      /* Switch to short labels at 400px */
-      .nb-full { display: none; }
-      .nb-short { display: inline; }
-
+      .nav-logo img { width: 30px; height: 30px; }
+      .nav-brand { font-size: 13px; }
       .a-stat .n { font-size: 20px; }
       .a-stat .l { font-size: 9.5px; }
-
-      /* Score: 2 rows of 3 still fits — keep 3 cols but shrink more */
-      .score-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
-      .sg { padding: 8px 6px; }
-      .sg .sn { font-size: 15px; }
-      .sg .sl { font-size: 9.5px; }
-      .score-num { font-size: 42px; }
-
-      .ov-stats { grid-template-columns: 1fr 1fr; }
-
-      .itb { padding: 12px 11px; font-size: 11px; }
-      .cc-hd-text h3 { font-size: 12px; }
-      .cc-hd-text p { font-size: 10px; }
+      .score-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+      .sg .sn { font-size: 16px; }
+      .score-num { font-size: 44px; }
+      .wg { grid-template-columns: 1fr; }
+      .ov-stats { grid-template-columns: 1fr; }
+      .xto-grid { grid-template-columns: 1fr 1fr; }
+      .nb { padding: 14px 8px; font-size: 11px; }
+      .itb { padding: 12px 12px; font-size: 11px; }
+      .a-pills { gap: 6px; }
+      .a-pill { font-size: 10px; padding: 4px 10px; }
     }
   </style>
 </head>
@@ -677,8 +613,8 @@
     <span class="nav-brand">Solar<span>Yaan</span></span>
   </a>
   <div class="nav-sep"></div>
-  <button class="nb" onclick="showPage('audit',this)"><span class="nb-full">LinkedIn Audit</span><span class="nb-short">Audit</span></button>
-  <button class="nb active" onclick="showPage('compare',this)"><span class="nb-full">Design Comparison</span><span class="nb-short">Designs</span></button>
+  <button class="nb" onclick="showPage('audit',this)">LinkedIn Audit</button>
+  <button class="nb active" onclick="showPage('compare',this)">Design Comparison</button>
   <div class="nav-end"><span class="nav-dot"></span>Prepared by xto100x</div>
 </nav>
 
