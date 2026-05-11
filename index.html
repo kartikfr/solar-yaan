@@ -3,482 +3,593 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>xto100x x SolarYaan — LinkedIn Audit & Design Comparison</title>
+  <title>xto100x x SolarYaan: LinkedIn Audit &amp; Design Comparison</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ── SOLARYAAN BRAND PALETTE ── */
     :root {
       --orange:   #F5820A;
-      --orange2:  #E06A00;
-      --navy:     #0A1E3D;
-      --navy2:    #142C55;
+      --orange2:  #D96A00;
+      --amber:    #FFAA3B;
+      --navy:     #071428;
+      --navy2:    #0E2347;
+      --navy3:    #172F5E;
+      --indigo:   #1E3A8A;
       --sky:      #4A9FD4;
       --sky2:     #2B7FB8;
       --white:    #ffffff;
-      --bg:       #F4F7FC;
-      --bg2:      #E8EFF8;
+      --bg:       #F6F8FD;
+      --bg2:      #ECF0FA;
       --surface:  #ffffff;
-      --border:   #D0DCF0;
-      --text:     #0A1E3D;
-      --mid:      #3A5070;
-      --light:    #6A85A8;
+      --border:   #DDE4F0;
+      --border2:  #C8D5EC;
+      --text:     #071428;
+      --mid:      #334E72;
+      --light:    #607A9E;
       --red:      #D93025;
-      --green:    #1E8A3C;
-      --font-head: 'Montserrat', system-ui, sans-serif;
-      --font-body: 'Inter', system-ui, sans-serif;
+      --green:    #0E7A35;
+      --grad-hero: linear-gradient(135deg, #071428 0%, #0E2347 40%, #1E3A8A 75%, #1B3060 100%);
+      --grad-orange: linear-gradient(90deg, #F5820A, #FFAA3B);
+      --grad-card: linear-gradient(160deg, #ffffff 0%, #F6F8FD 100%);
+      --fdisp: 'Playfair Display', Georgia, serif;
+      --fh:    'Montserrat', system-ui, sans-serif;
+      --fb:    'Poppins', system-ui, sans-serif;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      font-size: 14px;
-      line-height: 1.6;
-    }
+    body { font-family: var(--fb); background: var(--bg); color: var(--text); overflow-x: hidden; font-size: 15px; line-height: 1.65; }
 
-    /* ════════════════════════════
-       INTRO OVERLAY
-    ════════════════════════════ */
+    /* ── INTRO ── */
     #intro {
-      position: fixed; inset: 0;
-      background: var(--navy);
-      z-index: 9999;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 20px; cursor: pointer; padding: 24px;
-      text-align: center;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--grad-hero);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 20px; cursor: pointer; padding: 32px; text-align: center;
+      transition: opacity 0.65s ease, visibility 0.65s ease;
+    }
+    #intro::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(245,130,10,0.15) 0%, transparent 70%);
     }
     #intro.out { opacity: 0; visibility: hidden; pointer-events: none; }
+    .i-logo { width: min(120px, 40vw); height: min(120px, 40vw); border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 5px rgba(245,130,10,0.3), 0 0 0 12px rgba(245,130,10,0.1), 0 20px 60px rgba(0,0,0,0.5); animation: popIn 0.7s cubic-bezier(.34,1.56,.64,1) 0.2s both; position: relative; z-index: 1; }
+    .i-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @keyframes popIn { from { opacity:0; transform:scale(0.3) rotate(-12deg); } to { opacity:1; transform:scale(1) rotate(0); } }
+    .i-name { font-family: var(--fdisp); font-size: clamp(26px, 6vw, 40px); font-weight: 800; color: #fff; letter-spacing: -0.01em; animation: fadeUp 0.4s ease 0.85s both; position: relative; z-index: 1; }
+    .i-name span { background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .i-sub { font-family: var(--fb); font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.7); letter-spacing: 0.04em; animation: fadeUp 0.4s ease 1.05s both; position: relative; z-index: 1; }
+    .i-bar { width: min(220px, 58vw); height: 3px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; animation: fadeUp 0.4s ease 1.2s both; position: relative; z-index: 1; }
+    .i-fill { height: 100%; border-radius: 99px; background: var(--grad-orange); animation: barFill 1.8s ease 1.3s both; }
+    @keyframes barFill { from{width:0} to{width:100%} }
+    .i-by { font-family: var(--fb); font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.55); animation: fadeUp 0.4s ease 1.6s both; position: relative; z-index: 1; letter-spacing: 0.02em; }
+    .i-by strong { color: var(--amber); font-weight: 600; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
-    .i-logo-wrap {
-      animation: logoPop 0.7s cubic-bezier(.34,1.56,.64,1) 0.2s both;
-    }
-    /* SVG inline logo using SolarYaan brand assets */
-    .i-logo-svg { width: min(180px, 55vw); }
-
-    @keyframes logoPop {
-      from { opacity: 0; transform: scale(0.3) rotate(-10deg); }
-      to   { opacity: 1; transform: scale(1) rotate(0deg); }
-    }
-    .i-tagline {
-      font-family: var(--font-head);
-      font-size: clamp(13px, 3.5vw, 17px); font-weight: 700;
-      color: rgba(255,255,255,0.88); letter-spacing: 0.01em;
-      animation: fadeUp 0.4s ease 0.9s both;
-    }
-    .i-tagline span { color: var(--orange); }
-    .i-bar {
-      width: min(200px, 55vw); height: 3px;
-      background: rgba(255,255,255,0.12);
-      border-radius: 99px; overflow: hidden;
-      animation: fadeUp 0.4s ease 1.1s both;
-    }
-    .i-fill {
-      height: 100%; border-radius: 99px;
-      background: linear-gradient(90deg, var(--orange), var(--sky));
-      animation: barFill 1.6s ease 1.2s both;
-    }
-    @keyframes barFill { from { width: 0; } to { width: 100%; } }
-    .i-by {
-      font-family: var(--font-body);
-      font-size: 11.5px; font-weight: 500;
-      color: rgba(255,255,255,0.38);
-      animation: fadeUp 0.4s ease 1.5s both;
-    }
-    .i-by strong { color: var(--orange); font-weight: 700; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ════════════════════════════
-       NAV
-    ════════════════════════════ */
+    /* ── NAV ── */
     .nav {
-      background: var(--navy);
-      padding: 0 40px;
-      display: flex; align-items: center;
       position: sticky; top: 0; z-index: 200;
-      min-height: 62px;
-      box-shadow: 0 2px 20px rgba(10,30,61,0.4);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 44px;
+      display: flex; align-items: center;
+      min-height: 66px;
+      box-shadow: 0 1px 0 var(--border), 0 4px 24px rgba(7,20,40,0.07);
     }
-    .nav-logo { display: flex; align-items: center; padding: 10px 0; margin-right: 22px; flex-shrink: 0; }
-    .nav-logo svg { height: 32px; }
-    .nav-sep { width: 1px; height: 22px; background: rgba(255,255,255,0.2); margin-right: 8px; flex-shrink: 0; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; margin-right: 26px; flex-shrink: 0; text-decoration: none; }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px rgba(245,130,10,0.3); }
+    .nav-brand { font-family: var(--fdisp); font-size: 16px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+    .nav-brand span { background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-sep { width: 1px; height: 22px; background: var(--border2); margin-right: 8px; flex-shrink: 0; }
     .nb {
-      padding: 18px 16px;
-      font-family: var(--font-head);
-      font-size: 13px; font-weight: 600;
-      color: rgba(255,255,255,0.55);
-      border: none; background: none; cursor: pointer;
-      position: relative; white-space: nowrap;
-      transition: color 0.2s; letter-spacing: 0.01em;
+      padding: 20px 18px; font-family: var(--fh); font-size: 12.5px; font-weight: 600;
+      color: var(--light); border: none; background: none; cursor: pointer;
+      position: relative; white-space: nowrap; transition: color 0.2s; letter-spacing: 0.01em;
     }
     .nb::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 10px; right: 10px; height: 3px;
-      background: var(--orange);
-      transform: scaleX(0); transition: transform 0.25s;
-      border-radius: 3px 3px 0 0;
+      content: ''; position: absolute; bottom: 0; left: 10px; right: 10px; height: 2.5px;
+      background: var(--grad-orange); border-radius: 3px 3px 0 0;
+      transform: scaleX(0); transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
     }
-    .nb.active { color: #fff; }
+    .nb.active { color: var(--navy); }
     .nb.active::after { transform: scaleX(1); }
-    .nb:hover:not(.active) { color: rgba(255,255,255,0.85); }
-    .nav-end {
-      margin-left: auto;
-      display: flex; align-items: center; gap: 6px;
-      font-family: var(--font-head);
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35); flex-shrink: 0;
-    }
-    .nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); opacity: 0.7; }
+    .nb:hover:not(.active) { color: var(--navy); }
+    .nav-end { margin-left: auto; display: flex; align-items: center; gap: 7px; font-family: var(--fh); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--light); flex-shrink: 0; }
+    .nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--grad-orange); background: var(--orange); }
 
-    /* PAGES */
+    /* ── PAGES ── */
     .page { display: none; }
     .page.active { display: block; }
 
-    /* ════════════════════════════
+    /* ══════════════════════════════
        AUDIT HERO
-    ════════════════════════════ */
+    ══════════════════════════════ */
     .a-hero {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 50%, var(--sky2) 100%);
-      padding: 52px 48px 0;
-      position: relative; overflow: hidden;
-      text-align: center;
+      background: var(--grad-hero);
+      padding: 60px 52px 0; position: relative; overflow: hidden; text-align: center;
     }
     .a-hero::before {
-      content: '';
-      position: absolute; left: 50%; top: -80px;
-      transform: translateX(-50%);
-      width: 700px; height: 500px;
-      background: radial-gradient(ellipse, rgba(245,130,10,0.08) 0%, transparent 65%);
+      content: ''; position: absolute; left: 50%; top: -80px; transform: translateX(-50%);
+      width: 900px; height: 700px;
+      background: radial-gradient(ellipse, rgba(245,130,10,0.14) 0%, rgba(30,58,138,0.08) 45%, transparent 70%);
       pointer-events: none;
     }
-    .a-pills { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
-    .a-pill {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.82);
-      padding: 5px 14px; border-radius: 100px;
-      font-family: var(--font-head);
-      font-size: 10.5px; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
+    .a-hero::after {
+      content: ''; position: absolute; right: -100px; bottom: 40px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(74,159,212,0.08) 0%, transparent 65%);
+      pointer-events: none;
     }
-    .a-pill.orange {
-      background: rgba(245,130,10,0.2);
-      border-color: rgba(245,130,10,0.4);
-      color: #FFB054;
-    }
-    .a-hero h1 {
-      font-family: var(--font-head);
-      font-size: clamp(24px, 4vw, 44px);
-      font-weight: 900; color: #fff;
-      line-height: 1.1; letter-spacing: -0.02em;
-      margin-bottom: 14px;
-    }
-    .a-hero h1 span { color: var(--orange); }
-    .a-hero-sub {
-      font-family: var(--font-body);
-      font-size: 14.5px; color: rgba(255,255,255,0.65);
-      max-width: 620px; line-height: 1.75;
-      margin: 0 auto 40px;
-    }
-    .a-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      background: rgba(0,0,0,0.28);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin: 0 -48px;
-    }
-    .a-stat { padding: 22px 24px; border-right: 1px solid rgba(255,255,255,0.08); text-align: center; }
+    .a-pills { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+    .a-pill { background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.85); padding: 5px 15px; border-radius: 100px; font-family: var(--fh); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .a-pill.o { background: rgba(245,130,10,0.18); border-color: rgba(245,130,10,0.45); color: var(--amber); }
+    .a-hero h1 { font-family: var(--fdisp); font-size: clamp(30px, 5vw, 56px); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; position: relative; z-index: 1; }
+    .a-hero h1 span { background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .a-hero-sub { font-family: var(--fb); font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto 48px; line-height: 1.8; position: relative; z-index: 1; letter-spacing: 0.01em; }
+    .a-stats { display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(0,0,0,0.32); border-top: 1px solid rgba(255,255,255,0.07); margin: 0 -52px; position: relative; z-index: 1; }
+    .a-stat { padding: 26px 20px; border-right: 1px solid rgba(255,255,255,0.06); text-align: center; }
     .a-stat:last-child { border-right: none; }
-    .a-stat .n { font-family: var(--font-head); font-size: 28px; font-weight: 800; color: #fff; line-height: 1; }
-    .a-stat .n em { color: var(--orange); font-style: normal; }
-    .a-stat .l { font-size: 9.5px; font-weight: 600; color: rgba(255,255,255,0.4); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .a-stat .n { font-family: var(--fdisp); font-size: 32px; font-weight: 800; color: #fff; line-height: 1; }
+    .a-stat .n em { background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: normal; }
+    .a-stat .l { font-family: var(--fb); font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.65); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
 
-    /* AUDIT BODY */
-    .a-body { max-width: 1060px; margin: 0 auto; padding: 48px 28px 80px; }
+    /* Audit body */
+    .a-body { max-width: 1100px; margin: 0 auto; padding: 56px 32px 88px; }
 
-    .orange-bar {
-      height: 3px;
-      background: linear-gradient(90deg, var(--orange), var(--sky), var(--navy));
-      border-radius: 99px; margin-bottom: 44px;
-    }
+    /* Section header */
+    .sh { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+    .sh-icon { width: 42px; height: 42px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .sh-icon.r { background: linear-gradient(135deg, #FFF0EE, #FFE0DC); }
+    .sh-icon.g { background: linear-gradient(135deg, #EDFAF2, #D6F5E3); }
+    .sh-icon.b { background: linear-gradient(135deg, #EEF3FF, #DDE8FF); }
+    .sh-icon.o { background: linear-gradient(135deg, #FFF8ED, #FFEFD6); }
+    .sh-text h2 { font-family: var(--fh); font-size: 21px; font-weight: 800; color: var(--navy); letter-spacing: -0.01em; }
+    .sh-text p { font-family: var(--fb); font-size: 13px; font-weight: 400; color: var(--light); margin-top: 2px; }
+    .sh-rule { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border2), transparent); }
 
-    /* SCORE BADGE */
+    /* Score banner */
     .score-banner {
-      background: var(--navy);
-      border-radius: 18px;
-      padding: 28px 32px;
-      display: flex; align-items: center; gap: 24px;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
+      background: var(--grad-hero);
+      border-radius: 22px; padding: 34px 40px;
+      display: flex; align-items: center; gap: 32px; margin-bottom: 56px; flex-wrap: wrap;
+      position: relative; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(7,20,40,0.2);
     }
-    .score-main { flex-shrink: 0; text-align: center; }
-    .score-num {
-      font-family: var(--font-head);
-      font-size: 52px; font-weight: 900; color: var(--orange);
-      line-height: 1;
+    .score-banner::before {
+      content: ''; position: absolute; right: -60px; top: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(245,130,10,0.12) 0%, transparent 65%);
+      pointer-events: none;
     }
-    .score-denom { font-size: 20px; font-weight: 600; color: rgba(255,255,255,0.4); }
-    .score-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
-    .score-sep { width: 1px; height: 64px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
-    .score-body { flex: 1; min-width: 220px; }
-    .score-body h3 { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+    .score-main { text-align: center; flex-shrink: 0; position: relative; z-index: 1; }
+    .score-num { font-family: var(--fdisp); font-size: 68px; font-weight: 900; line-height: 1; background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .score-denom { font-family: var(--fb); font-size: 22px; font-weight: 400; color: rgba(255,255,255,0.5); }
+    .score-label { font-family: var(--fh); font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
+    .score-sep { width: 1px; height: 72px; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+    .score-body { flex: 1; min-width: 240px; position: relative; z-index: 1; }
+    .score-body h3 { font-family: var(--fh); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
     .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .sg { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 10px 12px; }
-    .sg .sn { font-family: var(--font-head); font-size: 18px; font-weight: 800; line-height: 1; }
-    .sg .sl { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.4); margin-top: 2px; }
-    .sg.r .sn { color: #FF6B5B; }
-    .sg.a .sn { color: #FFB054; }
-    .sg.g .sn { color: #5DD87A; }
+    .sg { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 16px; transition: background 0.2s; }
+    .sg:hover { background: rgba(255,255,255,0.09); }
+    .sg .sn { font-family: var(--fdisp); font-size: 22px; font-weight: 800; line-height: 1; }
+    .sg .sl { font-family: var(--fb); font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.72); margin-top: 4px; }
+    .sg.r .sn { color: #FF7A6B; }
+    .sg.a .sn { color: var(--amber); }
+    .sg.g .sn { color: #5DE882; }
 
-    /* DIAGNOSIS */
+    /* Diagnosis */
     .diag {
-      background: #FFF8EE;
-      border: 1.5px solid var(--orange);
-      border-radius: 16px;
-      padding: 24px 28px;
-      display: flex; gap: 16px; align-items: flex-start;
-      margin-bottom: 48px;
+      background: linear-gradient(135deg, #FFFCF5, #FFF8EC);
+      border: 1.5px solid rgba(245,130,10,0.4);
+      border-radius: 20px; padding: 28px 32px;
+      display: flex; gap: 20px; margin-bottom: 56px;
+      box-shadow: 0 4px 24px rgba(245,130,10,0.08);
     }
-    .diag-ico { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
-    .diag h3 { font-family: var(--font-head); font-size: 10px; font-weight: 700; color: #8A4800; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-    .diag p { font-family: var(--font-body); font-size: 14px; color: #3A2200; line-height: 1.75; }
-    .diag-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-    .dtag { font-size: 10.5px; font-weight: 600; padding: 3px 10px; border-radius: 6px; }
-    .dtag.r { background: #FDECEA; color: #C0392B; }
-    .dtag.a { background: #FFF3E0; color: #8A5C00; }
-    .dtag.g { background: #E8F5EA; color: #1E8A3C; }
+    .diag-ico { font-size: 28px; flex-shrink: 0; margin-top: 1px; }
+    .diag h3 { font-family: var(--fh); font-size: 11px; font-weight: 700; color: #6B3300; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+    .diag p { font-family: var(--fb); font-size: 14.5px; font-weight: 400; color: #3A2200; line-height: 1.8; }
+    .diag-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .dtag { font-family: var(--fh); font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 8px; }
+    .dtag.r { background: #FDECEA; color: #B52D20; }
+    .dtag.a { background: #FFF3E0; color: #8A4800; }
+    .dtag.g { background: #E6F5EC; color: #0E7A35; }
 
-    /* SECTION HEADER */
-    .sh { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid var(--border); }
-    .sh-num { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 16px; font-weight: 800; flex-shrink: 0; }
-    .sh-num.r { background: #FDECEA; color: #C0392B; }
-    .sh-num.g { background: #E8F5EA; color: #1E8A3C; }
-    .sh-num.b { background: #E8EFF8; color: var(--navy); }
-    .sh-num.o { background: #FFF3E0; color: var(--orange2); }
-    .sh-text h2 { font-family: var(--font-head); font-size: 20px; font-weight: 800; color: var(--navy); }
-    .sh-text p { font-size: 12px; color: var(--light); margin-top: 2px; }
-
-    /* ISSUE GRID */
-    .ig { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; }
-    .ic { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px; box-shadow: 0 2px 12px rgba(10,30,61,0.06); }
+    /* Issue grid */
+    .ig { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 56px; }
+    .ic {
+      background: var(--grad-card);
+      border: 1px solid var(--border); border-radius: 20px; padding: 26px;
+      box-shadow: 0 2px 0 var(--border), 0 4px 20px rgba(7,20,40,0.05);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .ic:hover { box-shadow: 0 2px 0 var(--border2), 0 12px 40px rgba(7,20,40,0.1); transform: translateY(-2px); }
     .ic.full { grid-column: 1 / -1; }
-    .ic-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-    .ic-ico { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-    .ic-ico.r { background: #FDECEA; }
-    .ic-ico.a { background: #FFF3E0; }
-    .ic h4 { font-family: var(--font-head); font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-    .ic p { font-family: var(--font-body); font-size: 13px; color: var(--mid); line-height: 1.7; }
-    .ic ul { padding-left: 18px; margin-top: 4px; }
-    .ic ul li { font-size: 13px; color: var(--mid); line-height: 1.7; margin-bottom: 4px; }
-    .fix { margin-top: 14px; padding-top: 14px; border-top: 1px solid #EDF2FB; display: flex; gap: 10px; align-items: flex-start; }
-    .fix-tag { font-family: var(--font-head); font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--green); background: #E8F5EA; padding: 3px 9px; border-radius: 6px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; }
-    .fix p { font-size: 12.5px; color: var(--mid); line-height: 1.65; }
+    .ic-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+    .ic-ico { width: 42px; height: 42px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .ic-ico.r { background: linear-gradient(135deg, #FFF0EE, #FFE0DC); }
+    .ic-ico.a { background: linear-gradient(135deg, #FFF8ED, #FFEFD6); }
+    .ic h4 { font-family: var(--fh); font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.3; }
+    .ic p { font-family: var(--fb); font-size: 13.5px; font-weight: 400; color: var(--mid); line-height: 1.8; }
+    .fix { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--bg2); display: flex; gap: 10px; align-items: flex-start; }
+    .fix-tag { font-family: var(--fh); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--green); background: linear-gradient(135deg, #EDFAF2, #D6F5E3); padding: 4px 11px; border-radius: 7px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; border: 1px solid rgba(14,122,53,0.2); }
+    .fix p { font-family: var(--fb); font-size: 13px; color: var(--mid); line-height: 1.7; }
 
-    /* WIN CARDS */
-    .wg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
-    .wc { background: var(--surface); border: 1.5px solid #B8D8C0; border-radius: 16px; padding: 22px 20px 18px; position: relative; overflow: hidden; }
-    .wc::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--orange), var(--sky)); }
-    .wc .wn-wrap { display: flex; align-items: baseline; gap: 6px; margin-bottom: 10px; }
-    .wc .wn { font-family: var(--font-head); font-size: 32px; font-weight: 900; color: var(--green); line-height: 1; }
-    .wc .wn-lbl { font-family: var(--font-head); font-size: 10px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.07em; opacity: 0.75; }
-    .wc h4 { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 7px; }
-    .wc p { font-size: 12.5px; color: var(--mid); line-height: 1.65; }
-    .wc .tip { margin-top: 10px; padding-top: 10px; border-top: 1px solid #CCE8D4; font-size: 12px; color: var(--green); font-weight: 600; }
-
-    /* CAPTION FRAMEWORK BOX */
-    .cap-box { background: #F0F6FF; border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; margin-top: 18px; }
-    .cap-box .cap-label { font-family: var(--font-head); font-size: 9.5px; font-weight: 700; color: var(--light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
-    .cap-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+    /* Cap framework */
+    .cap-box { background: linear-gradient(135deg, #EEF4FF, #F5F8FF); border: 1px solid #D0DCEF; border-radius: 16px; padding: 22px 26px; margin-top: 20px; }
+    .cap-label { font-family: var(--fh); font-size: 11px; font-weight: 700; color: var(--light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .cap-row { display: flex; gap: 13px; align-items: flex-start; margin-bottom: 11px; }
     .cap-row:last-child { margin-bottom: 0; }
-    .cap-num { width: 22px; height: 22px; border-radius: 7px; background: var(--navy); color: #fff; font-family: var(--font-head); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-    .cap-text { font-size: 12px; color: var(--mid); line-height: 1.6; }
-    .cap-text strong { color: var(--navy); font-weight: 700; }
+    .cap-num { width: 26px; height: 26px; border-radius: 8px; background: var(--grad-hero); color: #fff; font-family: var(--fh); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; box-shadow: 0 2px 6px rgba(7,20,40,0.2); }
+    .cap-text { font-family: var(--fb); font-size: 13px; color: var(--mid); line-height: 1.65; }
+    .cap-text strong { color: var(--navy); font-weight: 600; }
 
-    /* TABLE */
-    .tbl-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--border); margin-bottom: 48px; }
-    .tbl { width: 100%; border-collapse: collapse; background: var(--surface); min-width: 520px; }
-    .tbl thead tr { background: var(--navy); color: #fff; }
-    .tbl th { padding: 13px 16px; font-family: var(--font-head); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; text-align: left; white-space: nowrap; }
-    .tbl td { padding: 11px 16px; font-size: 12.5px; border-bottom: 1px solid var(--border); }
-    .tbl tr:last-child td { border-bottom: none; }
-    .tbl tbody tr:hover { background: #F4F8FF; }
-    .tbl tbody tr:nth-child(even) { background: #F8FAFF; }
-    .ph { color: var(--green); font-weight: 700; }
-    .pm { color: #C07000; font-weight: 600; }
-    .pl { color: var(--red); font-weight: 600; }
-
-    /* ACTION PLAN */
-    .pg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .pc { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-    .pc-hd { padding: 16px 20px; font-family: var(--font-head); font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.07em; line-height: 1.5; }
-    .pc-hd.p1 { background: var(--navy); }
-    .pc-hd.p2 { background: #1A6B30; }
-    .pc-hd.p3 { background: var(--orange2); }
-    .pc-body { padding: 18px 20px; }
-    .pi { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; }
-    .pi:last-child { margin-bottom: 0; }
-    .pid { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
-    .pi p { font-size: 12.5px; color: var(--mid); line-height: 1.6; }
-
-    /* MIX BARS */
-    .mix { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-    .mix-col h4 { font-family: var(--font-head); font-size: 10.5px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 14px; }
-    .mi { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
-    .mi-lbl { font-size: 12px; color: var(--mid); flex: 1; min-width: 0; }
-    .mi-bar { width: 80px; height: 6px; background: var(--bg2); border-radius: 99px; overflow: hidden; flex-shrink: 0; }
+    /* Mix bars */
+    .mix { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+    .mix-col h4 { font-family: var(--fh); font-size: 11px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 18px; }
+    .mi { display: flex; align-items: center; gap: 11px; margin-bottom: 12px; }
+    .mi-lbl { font-family: var(--fb); font-size: 12.5px; font-weight: 400; color: var(--mid); flex: 1; min-width: 0; }
+    .mi-bar { width: 96px; height: 7px; background: var(--bg2); border-radius: 99px; overflow: hidden; flex-shrink: 0; }
     .mi-fill { height: 100%; border-radius: 99px; }
-    .mi-pct { font-family: var(--font-head); font-size: 11px; font-weight: 700; color: var(--mid); width: 30px; text-align: right; flex-shrink: 0; }
+    .mi-pct { font-family: var(--fh); font-size: 11px; font-weight: 700; color: var(--mid); width: 36px; text-align: right; flex-shrink: 0; }
 
-    /* ════════════════════════════
+    /* xto value box */
+    .xto-value {
+      background: var(--grad-hero);
+      border-radius: 24px; padding: 40px 44px; margin: 0 0 56px;
+      display: flex; align-items: flex-start; gap: 36px; flex-wrap: wrap;
+      position: relative; overflow: hidden;
+      box-shadow: 0 10px 50px rgba(7,20,40,0.22);
+    }
+    .xto-value::before {
+      content: ''; position: absolute; left: -60px; bottom: -60px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(74,159,212,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .xto-value::after {
+      content: ''; position: absolute; right: -40px; top: -40px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(245,130,10,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .xto-value-left { flex: 1; min-width: 240px; position: relative; z-index: 1; }
+    .xto-eyebrow { font-family: var(--fh); font-size: 11px; font-weight: 700; background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px; display: block; }
+    .xto-value h3 { font-family: var(--fdisp); font-size: clamp(20px, 2.8vw, 28px); font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 16px; letter-spacing: -0.01em; }
+    .xto-value p { font-family: var(--fb); font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.78); line-height: 1.8; }
+    .xto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-shrink: 0; min-width: 268px; position: relative; z-index: 1; }
+    .xto-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 18px 20px; backdrop-filter: blur(4px); transition: background 0.2s; }
+    .xto-card:hover { background: rgba(255,255,255,0.1); }
+    .xto-card .xc-title { font-family: var(--fh); font-size: 14px; font-weight: 800; background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 5px; }
+    .xto-card .xc-sub { font-family: var(--fb); font-size: 12.5px; font-weight: 400; color: rgba(255,255,255,0.68); line-height: 1.6; }
+
+    /* Win cards */
+    .wg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+    .wc {
+      background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px; padding: 26px 24px 22px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 2px 0 var(--border), 0 6px 24px rgba(7,20,40,0.05);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .wc:hover { box-shadow: 0 2px 0 var(--border2), 0 14px 44px rgba(7,20,40,0.1); transform: translateY(-3px); }
+    .wc::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--grad-orange); }
+    .wc .wn-wrap { display: flex; align-items: baseline; gap: 7px; margin-bottom: 12px; }
+    .wc .wn { font-family: var(--fdisp); font-size: 40px; font-weight: 800; color: var(--green); line-height: 1; }
+    .wc .wn-lbl { font-family: var(--fh); font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; }
+    .wc h4 { font-family: var(--fh); font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 9px; }
+    .wc p { font-family: var(--fb); font-size: 13px; color: var(--mid); line-height: 1.75; }
+    .wc .tip { margin-top: 14px; padding-top: 14px; border-top: 1px solid #D4EDDC; font-family: var(--fb); font-size: 12.5px; color: var(--green); font-weight: 500; line-height: 1.6; }
+
+    /* Performance table */
+    .tbl-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--border); margin-bottom: 56px; box-shadow: 0 4px 24px rgba(7,20,40,0.07); }
+    .tbl { width: 100%; border-collapse: collapse; background: var(--surface); min-width: 540px; }
+    .tbl thead tr { background: var(--grad-hero); }
+    .tbl th { padding: 15px 18px; font-family: var(--fh); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; text-align: left; white-space: nowrap; color: rgba(255,255,255,0.9); }
+    .tbl td { padding: 13px 18px; font-family: var(--fb); font-size: 13px; border-bottom: 1px solid var(--border); color: var(--mid); }
+    .tbl td:first-child { color: var(--navy); font-weight: 500; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tbody tr:hover { background: linear-gradient(90deg, #F4F8FF, #F8FBFF); }
+    .tbl tbody tr:nth-child(even) { background: #F8FAFF; }
+    .ph { color: var(--green); font-weight: 600; }
+    .pm { color: #B07000; font-weight: 600; }
+    .pl { color: #C0392B; font-weight: 600; }
+
+    /* Action plan */
+    .pg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .pc { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(7,20,40,0.07); }
+    .pc-hd { padding: 20px 24px; font-family: var(--fh); font-size: 11.5px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.07em; line-height: 1.6; }
+    .pc-hd.p1 { background: linear-gradient(135deg, var(--navy), var(--navy3)); }
+    .pc-hd.p2 { background: linear-gradient(135deg, #0C5A24, #1A8A3C); }
+    .pc-hd.p3 { background: linear-gradient(135deg, #C05800, var(--orange)); }
+    .pc-body { padding: 22px 24px; }
+    .pi { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 15px; }
+    .pi:last-child { margin-bottom: 0; }
+    .pid { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+    .pi p { font-family: var(--fb); font-size: 13px; font-weight: 400; color: var(--mid); line-height: 1.7; }
+
+    /* ══════════════════════════════
        COMPARE HERO
-    ════════════════════════════ */
+    ══════════════════════════════ */
     .c-hero {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 50%, var(--sky2) 100%);
-      padding: 52px 48px 44px;
-      text-align: center; position: relative; overflow: hidden;
+      background: var(--grad-hero);
+      padding: 60px 52px 52px; text-align: center; position: relative; overflow: hidden;
     }
     .c-hero::before {
-      content: ''; position: absolute; left: 50%; top: -80px;
-      transform: translateX(-50%);
-      width: 600px; height: 500px;
-      background: radial-gradient(ellipse, rgba(245,130,10,0.07) 0%, transparent 65%);
+      content: ''; position: absolute; left: 50%; top: -80px; transform: translateX(-50%);
+      width: 800px; height: 640px;
+      background: radial-gradient(ellipse, rgba(245,130,10,0.12) 0%, rgba(30,58,138,0.07) 45%, transparent 70%);
       pointer-events: none;
     }
     .c-eyebrow {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 100px; padding: 5px 16px; margin-bottom: 16px;
-      font-family: var(--font-head); font-size: 10.5px; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8);
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px; padding: 7px 20px; margin-bottom: 20px;
+      font-family: var(--fh); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.88);
     }
-    .c-hero h1 { font-family: var(--font-head); font-size: clamp(22px, 3.5vw, 40px); font-weight: 900; color: #fff; margin-bottom: 10px; letter-spacing: -0.02em; line-height: 1.12; }
-    .c-hero h1 .orange { color: var(--orange); }
-    .c-hero > p { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto; line-height: 1.75; }
-    .c-pills { display: flex; justify-content: center; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
-    .cp { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.85); padding: 4px 14px; border-radius: 100px; font-size: 11.5px; font-weight: 500; }
-    .cp.orange { background: rgba(245,130,10,0.18); border-color: rgba(245,130,10,0.35); color: #FFB054; }
+    .c-hero h1 { font-family: var(--fdisp); font-size: clamp(26px, 4.5vw, 50px); font-weight: 900; color: #fff; margin-bottom: 14px; letter-spacing: -0.02em; line-height: 1.08; }
+    .c-hero h1 .o { background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .c-hero > p { font-family: var(--fb); font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.72); max-width: 560px; margin: 0 auto; line-height: 1.8; letter-spacing: 0.01em; }
+    .c-pills { display: flex; justify-content: center; gap: 8px; margin-top: 26px; flex-wrap: wrap; }
+    .cp { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.88); padding: 5px 15px; border-radius: 100px; font-family: var(--fb); font-size: 12px; font-weight: 500; }
+    .cp.o { background: rgba(245,130,10,0.16); border-color: rgba(245,130,10,0.38); color: var(--amber); }
 
-    /* INNER TABS */
-    .itabs { background: var(--surface); border-bottom: 2px solid var(--border); display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; box-shadow: 0 2px 8px rgba(10,30,61,0.06); }
+    /* Inner tabs */
+    .itabs {
+      background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--border);
+      display: flex; justify-content: center; overflow-x: auto;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      box-shadow: 0 2px 12px rgba(7,20,40,0.07);
+    }
     .itabs::-webkit-scrollbar { display: none; }
-    .itb { padding: 15px 24px; font-family: var(--font-head); font-size: 13px; font-weight: 600; color: var(--light); border: none; background: none; cursor: pointer; position: relative; white-space: nowrap; transition: color 0.2s; flex-shrink: 0; }
-    .itb::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--orange); transform: scaleX(0); transition: transform 0.25s; }
+    .itb {
+      padding: 18px 28px; font-family: var(--fh); font-size: 12.5px; font-weight: 600;
+      color: var(--light); border: none; background: none; cursor: pointer;
+      position: relative; white-space: nowrap; transition: color 0.2s; flex-shrink: 0; letter-spacing: 0.01em;
+    }
+    .itb::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 3px; background: var(--grad-orange); transform: scaleX(0); transition: transform 0.3s cubic-bezier(.34,1.56,.64,1); border-radius: 2px 2px 0 0; }
     .itb.active { color: var(--navy); }
     .itb.active::after { transform: scaleX(1); }
     .itb:hover:not(.active) { color: var(--sky2); }
 
-    /* PANES */
-    .pane { display: none; padding: 48px 28px 72px; max-width: 1100px; margin: 0 auto; }
+    /* Panes */
+    .pane { display: none; padding: 56px 32px 88px; max-width: 1140px; margin: 0 auto; }
     .pane.active { display: block; }
-    .p-intro { text-align: center; margin-bottom: 36px; }
-    .p-intro h2 { font-family: var(--font-head); font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
-    .p-intro p { font-size: 13.5px; color: var(--mid); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+    .p-intro { text-align: center; margin-bottom: 44px; }
+    .p-intro h2 { font-family: var(--fdisp); font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 12px; letter-spacing: -0.01em; }
+    .p-intro p { font-family: var(--fb); font-size: 14px; font-weight: 400; color: var(--mid); max-width: 560px; margin: 0 auto; line-height: 1.8; }
 
-    /* COMPARE CARD */
-    .cc { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 28px rgba(10,30,61,0.09); margin-bottom: 32px; }
-    .cc-hd { background: linear-gradient(90deg, var(--navy), var(--navy2)); padding: 18px 26px; display: flex; align-items: center; gap: 14px; }
-    .cc-num { width: 34px; height: 34px; background: rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0; }
-    .cc-hd-text { min-width: 0; }
-    .cc-hd h3 { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: #fff; }
-    .cc-hd p { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+    /* Compare card */
+    .cc { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; box-shadow: 0 8px 44px rgba(7,20,40,0.1); margin-bottom: 40px; }
+    .cc-hd { background: var(--grad-hero); padding: 22px 30px; display: flex; align-items: center; gap: 18px; position: relative; overflow: hidden; }
+    .cc-hd::after { content: ''; position: absolute; right: -30px; top: -30px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(245,130,10,0.1) 0%, transparent 65%); pointer-events: none; }
+    .cc-num { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--fdisp); font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .cc-hd-text h3 { font-family: var(--fh); font-size: 15px; font-weight: 700; color: #fff; }
+    .cc-hd-text p { font-family: var(--fb); font-size: 12.5px; font-weight: 400; color: rgba(255,255,255,0.7); margin-top: 3px; }
+
     .cc-grid { display: grid; grid-template-columns: 1fr 1fr; }
-    .cc-orig { padding: 24px; border-right: 1px solid var(--border); background: #F4F7FC; }
-    .cc-ours { padding: 24px; background: var(--surface); }
-    .lbl-orig { display: inline-flex; align-items: center; gap: 7px; background: #E8EFF8; border: 1px solid #C4D4E8; color: #4A6A90; padding: 4px 12px; border-radius: 100px; font-family: var(--font-head); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 14px; }
-    .lbl-ours { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(90deg, #FFF3E0, #E8EFF8); border: 1px solid #F5C080; color: var(--navy); padding: 4px 12px; border-radius: 100px; font-family: var(--font-head); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 14px; }
+    .cc-col { padding: 30px; }
+    .cc-col.cc-orig { background: linear-gradient(160deg, #F5F8FD, #EEF3FA); border-right: 1px solid var(--border); }
+    .cc-col.cc-ours { background: var(--surface); }
+
+    .lbl-orig { display: inline-flex; align-items: center; gap: 7px; background: #EAF0F8; border: 1px solid #C8D8EC; color: #3A5A80; padding: 5px 14px; border-radius: 100px; font-family: var(--fh); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 18px; }
+    .lbl-ours { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(90deg, #FFF3E0, #FFF8EC); border: 1px solid #F5C080; color: var(--navy2); padding: 5px 14px; border-radius: 100px; font-family: var(--fh); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 18px; }
     .lbl-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
     .lbl-orig .lbl-dot { background: #8AAAC4; }
     .lbl-ours .lbl-dot { background: var(--orange); }
-    .badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .our-star { background: linear-gradient(90deg, var(--orange), #F5A030); color: #fff; font-family: var(--font-head); font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
-    .img-orig { width: 100%; border-radius: 12px; display: block; border: 1px solid var(--border); opacity: 0.80; filter: saturate(0.82); }
-    .img-ours { width: 100%; border-radius: 13px; display: block; border: 2.5px solid var(--orange); box-shadow: 0 0 0 5px rgba(245,130,10,0.1), 0 10px 36px rgba(10,30,61,0.16); transition: transform 0.3s, box-shadow 0.3s; }
-    .img-ours:hover { transform: translateY(-5px) scale(1.012); box-shadow: 0 0 0 7px rgba(245,130,10,0.18), 0 20px 52px rgba(10,30,61,0.2); }
-    .diff-bar { background: linear-gradient(180deg, #F4F8FF, #F0F5EC); border-top: 1px solid var(--border); padding: 24px 28px; }
-    .diff-bar h4 { font-family: var(--font-head); font-size: 10px; font-weight: 700; color: var(--light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
-    .dg { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
-    .di { display: flex; gap: 10px; align-items: flex-start; }
-    .di-ico { width: 28px; height: 28px; background: var(--orange); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-    .di-ico svg { width: 14px; height: 14px; fill: #fff; }
-    .di strong { font-family: var(--font-head); font-size: 12.5px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 3px; }
-    .di span { font-size: 11.5px; color: var(--mid); line-height: 1.6; }
+    .badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+    .our-star { background: var(--grad-orange); color: #fff; font-family: var(--fh); font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 11px; border-radius: 100px; box-shadow: 0 2px 10px rgba(245,130,10,0.35); }
 
-    /* OVERVIEW */
-    .ov-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
-    .os { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px 18px; text-align: center; border-top: 3px solid var(--orange); }
-    .os .n { font-family: var(--font-head); font-size: 34px; font-weight: 900; color: var(--navy); line-height: 1; }
-    .os .n em { color: var(--orange); font-style: normal; }
-    .os .l { font-size: 11.5px; color: var(--light); margin-top: 4px; font-weight: 500; }
-    .ov-tbl-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--border); }
+    .img-orig { width: 100%; border-radius: 14px; display: block; border: 1px solid var(--border); filter: saturate(0.85) brightness(0.96); }
+    .img-ours { width: 100%; border-radius: 16px; display: block; border: 2.5px solid var(--orange); box-shadow: 0 0 0 6px rgba(245,130,10,0.1), 0 14px 48px rgba(7,20,40,0.15); transition: transform 0.35s cubic-bezier(.34,1.1,.64,1), box-shadow 0.35s; }
+    .img-ours:hover { transform: translateY(-7px) scale(1.015); box-shadow: 0 0 0 9px rgba(245,130,10,0.18), 0 28px 64px rgba(7,20,40,0.22); }
+
+    .diff-bar { background: linear-gradient(180deg, #F8FAFC, #F2F6EF); border-top: 1px solid var(--border); padding: 30px 34px; }
+    .diff-bar h4 { font-family: var(--fh); font-size: 11px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 22px; }
+    .dg { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .di { display: flex; gap: 13px; align-items: flex-start; }
+    .di-ico { width: 34px; height: 34px; background: var(--grad-orange); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; box-shadow: 0 3px 10px rgba(245,130,10,0.3); }
+    .di-ico svg { width: 16px; height: 16px; fill: #fff; }
+    .di strong { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 4px; }
+    .di span { font-family: var(--fb); font-size: 12.5px; font-weight: 400; color: var(--mid); line-height: 1.7; }
+
+    /* Overview */
+    .ov-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 36px; }
+    .os { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 26px; text-align: center; border-top: 4px solid transparent; border-image: var(--grad-orange) 1; border-radius: 18px; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(7,20,40,0.07); }
+    .os::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--grad-orange); border-radius: 18px 18px 0 0; }
+    .os .n { font-family: var(--fdisp); font-size: 40px; font-weight: 900; color: var(--navy); line-height: 1; }
+    .os .n em { background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: normal; }
+    .os .l { font-family: var(--fb); font-size: 12px; font-weight: 400; color: var(--light); margin-top: 6px; }
+    .ov-tbl-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(7,20,40,0.07); }
     .ov-tbl { width: 100%; border-collapse: collapse; background: var(--surface); min-width: 500px; }
-    .ov-tbl thead tr { background: var(--navy); color: #fff; }
-    .ov-tbl th { padding: 13px 18px; font-family: var(--font-head); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; text-align: left; white-space: nowrap; }
-    .ov-tbl td { padding: 13px 18px; font-size: 13px; border-bottom: 1px solid var(--border); }
+    .ov-tbl thead tr { background: var(--grad-hero); }
+    .ov-tbl th { padding: 15px 22px; font-family: var(--fh); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; text-align: left; white-space: nowrap; color: rgba(255,255,255,0.9); }
+    .ov-tbl td { padding: 15px 22px; font-family: var(--fb); font-size: 13.5px; font-weight: 400; border-bottom: 1px solid var(--border); color: var(--mid); }
     .ov-tbl tr:last-child td { border-bottom: none; }
-    .ov-tbl tbody tr:nth-child(even) { background: #F6F9FF; }
-    .tb { background: #E8EFF8; color: #3A6090; padding: 2px 8px; border-radius: 5px; font-family: var(--font-head); font-size: 11px; font-weight: 600; }
-    .ta { background: #FFF3E0; color: #8A4800; padding: 2px 8px; border-radius: 5px; font-family: var(--font-head); font-size: 11px; font-weight: 600; }
+    .ov-tbl tbody tr:nth-child(even) { background: #F7F9FF; }
+    .tb { background: #FDECEA; color: #B52D20; padding: 3px 10px; border-radius: 7px; font-family: var(--fh); font-size: 11px; font-weight: 600; }
+    .tg { background: #E4F7EB; color: #0E7A35; padding: 3px 10px; border-radius: 7px; font-family: var(--fh); font-size: 11px; font-weight: 600; }
 
-    /* FOOTER */
-    footer { background: var(--navy); text-align: center; padding: 28px 24px; color: rgba(255,255,255,0.35); font-size: 12.5px; }
-    footer strong { color: var(--orange); font-weight: 700; }
+    /* Footer */
+    footer {
+      background: var(--grad-hero);
+      text-align: center; padding: 36px 24px;
+      color: rgba(255,255,255,0.3); font-family: var(--fb); font-size: 13px; font-weight: 400;
+      position: relative; overflow: hidden;
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    }
+    footer strong { font-weight: 700; background: var(--grad-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-    /* ════════════════════════════
+    /* ══════════════════════════════
        RESPONSIVE
-    ════════════════════════════ */
+    ══════════════════════════════ */
+
+    /* ── Tablet landscape (≤1100px) ── */
     @media (max-width: 1100px) {
       .wg { grid-template-columns: 1fr 1fr; }
       .pg { grid-template-columns: 1fr 1fr; }
-      .score-grid { grid-template-columns: repeat(3, 1fr); }
+      .a-body { padding: 48px 28px 72px; }
+      .pane { padding: 48px 28px 72px; }
     }
+
+    /* ── Tablet portrait (≤860px) ── */
     @media (max-width: 860px) {
+      /* Nav */
+      .nav { padding: 0 20px; min-height: 58px; }
+      .nav-end { display: none; }
+      .nb { padding: 18px 14px; font-size: 12px; }
+
+      /* Audit hero */
       .a-hero { padding: 40px 24px 0; }
       .a-stats { grid-template-columns: 1fr 1fr; margin: 0 -24px; }
       .a-body { padding: 36px 20px 60px; }
-      .c-hero { padding: 40px 24px 36px; }
+
+      /* Score banner */
+      .score-banner { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 28px; }
+      .score-sep { display: none; }
+      .score-main { display: flex; align-items: center; gap: 16px; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+
+      /* Issue grid */
       .ig { grid-template-columns: 1fr; }
       .ic.full { grid-column: auto; }
+
+      /* Mix bars */
+      .mix { grid-template-columns: 1fr; gap: 28px; }
+
+      /* xto value */
+      .xto-value { flex-direction: column; padding: 28px 24px; gap: 24px; }
+      .xto-grid { min-width: unset; width: 100%; }
+
+      /* Win cards */
       .wg { grid-template-columns: 1fr 1fr; }
-      .mix { grid-template-columns: 1fr; }
-      .pg { grid-template-columns: 1fr; }
+
+      /* Action plan */
+      .pg { grid-template-columns: 1fr 1fr; }
+
+      /* Compare hero */
+      .c-hero { padding: 40px 24px 36px; }
+
+      /* Compare tabs */
+      .itb { padding: 16px 20px; font-size: 12px; }
+
+      /* Pane */
+      .pane { padding: 36px 20px 60px; }
+
+      /* Compare card */
       .cc-grid { grid-template-columns: 1fr; }
-      .cc-orig { border-right: none; border-bottom: 1px solid var(--border); }
+      .cc-col.cc-orig { border-right: none; border-bottom: 1px solid var(--border); }
+      .diff-bar { padding: 26px 24px; }
+      .dg { grid-template-columns: 1fr 1fr; }
+
+      /* Overview */
       .ov-stats { grid-template-columns: 1fr 1fr; }
-      .pane { padding: 32px 20px 60px; }
-      .nav { padding: 0 20px; }
-      .nav-end { display: none; }
-      .score-banner { flex-direction: column; align-items: flex-start; }
-      .score-sep { display: none; }
-      .score-grid { grid-template-columns: repeat(3, 1fr); }
+
+      /* Diagnosis */
+      .diag { flex-direction: column; gap: 12px; }
     }
+
+    /* ── Mobile (≤600px) ── */
     @media (max-width: 600px) {
+      /* Nav */
+      .nav { padding: 0 16px; min-height: 54px; }
+      .nav-brand { font-size: 14px; }
+      .nb { padding: 16px 10px; font-size: 11.5px; }
+      .nav-sep { margin-right: 4px; }
+
+      /* Audit hero */
       .a-hero { padding: 32px 16px 0; }
       .a-stats { margin: 0 -16px; grid-template-columns: 1fr 1fr; }
-      .a-stat { padding: 16px 14px; }
-      .a-stat .n { font-size: 22px; }
-      .a-body { padding: 28px 16px 52px; }
-      .c-hero { padding: 32px 16px 28px; }
-      .pane { padding: 24px 16px 52px; }
+      .a-stat { padding: 16px 12px; }
+      .a-stat .n { font-size: 24px; }
+      .a-stat .l { font-size: 10px; }
+      .a-body { padding: 28px 16px 48px; }
+      .a-hero h1 { font-size: clamp(28px, 8vw, 42px); }
+      .a-hero-sub { font-size: 14px; margin-bottom: 36px; }
+
+      /* Score banner */
+      .score-banner { padding: 22px 18px; border-radius: 16px; }
+      .score-num { font-size: 52px; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .sg { padding: 10px 12px; }
+      .sg .sn { font-size: 18px; }
+
+      /* Diagnosis */
+      .diag { padding: 18px 16px; border-radius: 14px; }
+      .diag p { font-size: 13.5px; }
+
+      /* Issue cards */
+      .ic { padding: 20px; border-radius: 16px; }
+      .ic h4 { font-size: 13px; }
+      .ic p { font-size: 13px; }
+
+      /* xto value box */
+      .xto-value { padding: 22px 18px; border-radius: 18px; }
+      .xto-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Win cards */
+      .wg { grid-template-columns: 1fr; }
+      .wc { padding: 22px 18px 18px; }
+
+      /* Action plan */
+      .pg { grid-template-columns: 1fr; }
+
+      /* Compare hero */
+      .c-hero { padding: 30px 16px 28px; }
+      .c-hero h1 { font-size: clamp(24px, 7vw, 38px); }
+
+      /* Compare tabs */
+      .itb { padding: 14px 14px; font-size: 11.5px; }
+
+      /* Pane */
+      .pane { padding: 24px 16px 48px; }
+      .p-intro h2 { font-size: 22px; }
+      .p-intro p { font-size: 13.5px; }
+
+      /* Compare card */
+      .cc { border-radius: 18px; }
+      .cc-hd { padding: 18px 20px; gap: 14px; }
+      .cc-num { width: 34px; height: 34px; font-size: 14px; }
+      .cc-hd-text h3 { font-size: 13.5px; }
+      .cc-hd-text p { font-size: 11.5px; }
+      .cc-col { padding: 18px 16px; }
+      .diff-bar { padding: 20px 16px; }
+      .dg { grid-template-columns: 1fr; gap: 14px; }
+      .di strong { font-size: 12.5px; }
+      .di span { font-size: 12px; }
+
+      /* Overview */
+      .ov-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .os { padding: 18px 14px; border-radius: 14px; }
+      .os .n { font-size: 32px; }
+
+      /* Section headers */
+      .sh-text h2 { font-size: 17px; }
+      .sh-text p { font-size: 12px; }
+      .sh-icon { width: 36px; height: 36px; font-size: 16px; border-radius: 10px; }
+    }
+
+    /* ── Small mobile (≤400px) ── */
+    @media (max-width: 400px) {
+      .nav-logo img { width: 30px; height: 30px; }
+      .nav-brand { font-size: 13px; }
+      .a-stat .n { font-size: 20px; }
+      .a-stat .l { font-size: 9.5px; }
+      .score-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+      .sg .sn { font-size: 16px; }
+      .score-num { font-size: 44px; }
       .wg { grid-template-columns: 1fr; }
       .ov-stats { grid-template-columns: 1fr; }
-      .nb { padding: 16px 12px; font-size: 12px; }
-      .itb { padding: 13px 16px; font-size: 12px; }
-      .dg { grid-template-columns: 1fr; }
-      .score-grid { grid-template-columns: 1fr 1fr; }
-      .diag { padding: 18px 16px; }
-    }
-    @media (max-width: 400px) {
-      .a-stat .n { font-size: 18px; }
-      .nav-logo svg { height: 26px; }
+      .xto-grid { grid-template-columns: 1fr 1fr; }
+      .nb { padding: 14px 8px; font-size: 11px; }
+      .itb { padding: 12px 12px; font-size: 11px; }
+      .a-pills { gap: 6px; }
+      .a-pill { font-size: 10px; padding: 4px 10px; }
     }
   </style>
 </head>
@@ -486,83 +597,50 @@
 
 <!-- INTRO -->
 <div id="intro" onclick="this.classList.add('out')">
-  <!-- SolarYaan logo reconstructed from brand assets -->
-  <div class="i-logo-wrap">
-    <svg class="i-logo-svg" viewBox="0 0 220 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Solar panel icon circle -->
-      <circle cx="38" cy="38" r="34" fill="#0A1E3D"/>
-      <circle cx="38" cy="38" r="28" fill="#4A9FD4" opacity="0.3"/>
-      <!-- Solar panel grid -->
-      <rect x="20" y="22" width="36" height="32" rx="3" fill="#0A1E3D" stroke="#4A9FD4" stroke-width="1.5"/>
-      <line x1="20" y1="32" x2="56" y2="32" stroke="#4A9FD4" stroke-width="1"/>
-      <line x1="20" y1="42" x2="56" y2="42" stroke="#4A9FD4" stroke-width="1"/>
-      <line x1="32" y1="22" x2="32" y2="54" stroke="#4A9FD4" stroke-width="1"/>
-      <line x1="44" y1="22" x2="44" y2="54" stroke="#4A9FD4" stroke-width="1"/>
-      <!-- Rocket -->
-      <path d="M46 18 L54 10 L58 18 L50 22 Z" fill="#F5820A"/>
-      <circle cx="50" cy="16" r="2.5" fill="#fff"/>
-      <!-- Sun rays -->
-      <circle cx="38" cy="64" r="6" fill="#F5820A"/>
-      <line x1="38" y1="55" x2="38" y2="52" stroke="#F5820A" stroke-width="2" stroke-linecap="round"/>
-      <line x1="38" y1="73" x2="38" y2="76" stroke="#F5820A" stroke-width="2" stroke-linecap="round"/>
-      <line x1="29" y1="64" x2="26" y2="64" stroke="#F5820A" stroke-width="2" stroke-linecap="round"/>
-      <line x1="47" y1="64" x2="50" y2="64" stroke="#F5820A" stroke-width="2" stroke-linecap="round"/>
-      <!-- SOLAR text -->
-      <text x="80" y="40" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="28" fill="#ffffff" letter-spacing="-0.5">SOLAR</text>
-      <!-- YAAN text -->
-      <text x="80" y="66" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="28" fill="#F5820A" letter-spacing="2">YAAN</text>
-    </svg>
+  <div class="i-logo">
+    <img src="solaryaan_logo.jpeg" alt="SolarYaan" />
   </div>
-  <div class="i-tagline">Your LinkedIn, <span>honestly assessed.</span></div>
+  <div class="i-name">Solar<span>Yaan</span></div>
+  <div class="i-sub">LinkedIn Audit &amp; Design Comparison</div>
   <div class="i-bar"><div class="i-fill"></div></div>
-  <div class="i-by">Prepared by <strong>xto100x</strong> &nbsp;·&nbsp; May 2026</div>
+  <div class="i-by">Prepared by <strong>xto100x</strong> / May 2026</div>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">
-    <svg viewBox="0 0 160 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="22" cy="25" r="20" fill="#142C55"/>
-      <rect x="10" y="14" width="24" height="20" rx="2" fill="#142C55" stroke="#4A9FD4" stroke-width="1.2"/>
-      <line x1="10" y1="21" x2="34" y2="21" stroke="#4A9FD4" stroke-width="0.8"/>
-      <line x1="10" y1="27" x2="34" y2="27" stroke="#4A9FD4" stroke-width="0.8"/>
-      <line x1="18" y1="14" x2="18" y2="34" stroke="#4A9FD4" stroke-width="0.8"/>
-      <line x1="26" y1="14" x2="26" y2="34" stroke="#4A9FD4" stroke-width="0.8"/>
-      <path d="M29 11 L34 6 L37 12 L32 15 Z" fill="#F5820A"/>
-      <text x="48" y="23" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="17" fill="#ffffff">SOLAR</text>
-      <text x="48" y="40" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="17" fill="#F5820A" letter-spacing="1">YAAN</text>
-    </svg>
-  </div>
+  <a class="nav-logo" href="#">
+    <img src="solaryaan_logo.jpeg" alt="SolarYaan" />
+    <span class="nav-brand">Solar<span>Yaan</span></span>
+  </a>
   <div class="nav-sep"></div>
   <button class="nb" onclick="showPage('audit',this)">LinkedIn Audit</button>
   <button class="nb active" onclick="showPage('compare',this)">Design Comparison</button>
   <div class="nav-end"><span class="nav-dot"></span>Prepared by xto100x</div>
 </nav>
 
-<!-- ══════════════════════════
+<!-- ══════════════════════════════
      AUDIT PAGE
-══════════════════════════ -->
+══════════════════════════════ -->
 <div id="page-audit" class="page">
 
   <div class="a-hero">
     <div class="a-pills">
       <span class="a-pill">May 2026</span>
-      <span class="a-pill orange">Prepared by xto100x</span>
+      <span class="a-pill o">Prepared by xto100x</span>
       <span class="a-pill">21 Posts Reviewed</span>
-      <span class="a-pill">Last 30 Days</span>
+      <span class="a-pill">Apr 11 – May 11, 2026</span>
     </div>
-    <h1>LinkedIn Audit Report<br><span>SolarYaan</span></h1>
-    <p class="a-hero-sub">This report is in two parts. First: what SolarYaan is doing wrong. Second: what they could do right — and exactly where xto100x comes in to make it happen.</p>
+    <h1>LinkedIn Audit<br><span>SolarYaan</span></h1>
+    <p class="a-hero-sub">Two parts: what SolarYaan is doing wrong, and exactly how xto100x fixes it.</p>
     <div class="a-stats">
       <div class="a-stat"><div class="n">5,136</div><div class="l">Followers</div></div>
       <div class="a-stat"><div class="n">3.2<em>/10</em></div><div class="l">Overall Score</div></div>
       <div class="a-stat"><div class="n">57<em>%</em></div><div class="l">Posts on one event</div></div>
-      <div class="a-stat"><div class="n">264</div><div class="l">Top post (New Hire)</div></div>
+      <div class="a-stat"><div class="n">264</div><div class="l">Top post likes</div></div>
     </div>
   </div>
 
   <div class="a-body">
-    <div class="orange-bar"></div>
 
     <!-- SCORECARD -->
     <div class="score-banner">
@@ -588,8 +666,8 @@
     <div class="diag">
       <div class="diag-ico">&#9888;&#65039;</div>
       <div>
-        <h3>The One-Line Diagnosis</h3>
-        <p>SolarYaan has the posting habit, the founder presence, and an IPO story that should be making headlines. What they don't have is a content system. No hooks, no CTAs, no visual brand, and 57% of posts about one expo. The gap is entirely in execution, not in material.</p>
+        <h3>Diagnosis</h3>
+        <p>SolarYaan has the posting habit, the founder presence, and an IPO story worth headlines. What they don't have is a content system. No hooks, no CTAs, no visual brand, 57% of posts about one expo. The gap is execution, not material.</p>
         <div class="diag-tags">
           <span class="dtag r">No hooks in any caption</span>
           <span class="dtag r">Keyword dumps still live in posts</span>
@@ -602,53 +680,54 @@
       </div>
     </div>
 
-    <!-- WHAT'S NOT WORKING -->
+    <!-- PART 1: WHAT'S NOT WORKING -->
     <div class="sh">
-      <div class="sh-num r">!</div>
-      <div class="sh-text"><h2>What's Not Working</h2><p>The issues behind the 3.2 score</p></div>
+      <div class="sh-icon r">&#9888;</div>
+      <div class="sh-text"><h2>Part 1: What SolarYaan Is Doing Wrong</h2><p>Six issues behind the 3.2 score</p></div>
+      <div class="sh-rule"></div>
     </div>
     <div class="ig">
 
       <div class="ic full">
         <div class="ic-top"><div class="ic-ico r">&#128218;</div><h4>Every Caption Follows the Same Dead Format</h4></div>
-        <p>All 21 posts this month follow an identical mechanical template: one or two announcement lines, then a square-bracket keyword dump like <strong>[Solar Yaan, RenewX 2026, Chennai Trade Centre, Solar Power...]</strong>, then 5 hashtags. Those bracket blocks are SEO meta-tags that were never removed before publishing. Every professional reading the post knows immediately that a tool generated this and nobody reviewed it. There are no hooks, no storytelling, no CTAs. The audience is handed information and then abandoned.</p>
+        <p>Every post ends with a square-bracket keyword dump like <strong>[Solar Yaan, RenewX 2026, Chennai Trade Centre, Solar Power...]</strong> followed by 5 hashtags. Those bracket blocks are SEO meta-tags that were never removed before publishing. No hooks, no storytelling, no CTAs anywhere.</p>
         <div class="cap-box">
-          <div class="cap-label">The fix: every caption needs this structure</div>
-          <div class="cap-row"><div class="cap-num">1</div><div class="cap-text"><strong>Hook</strong> — one bold line that earns the click to "see more"</div></div>
-          <div class="cap-row"><div class="cap-num">2</div><div class="cap-text"><strong>Context</strong> — 2 lines of what's happening and why it matters</div></div>
-          <div class="cap-row"><div class="cap-num">3</div><div class="cap-text"><strong>Insight</strong> — what the reader takes away from this</div></div>
-          <div class="cap-row"><div class="cap-num">4</div><div class="cap-text"><strong>CTA</strong> — one direct ask: comment, DM, follow, share</div></div>
-          <div class="cap-row"><div class="cap-num">5</div><div class="cap-text"><strong>3-5 Hashtags</strong> — no keyword dumps, no square brackets</div></div>
+          <div class="cap-label">Every caption needs this structure</div>
+          <div class="cap-row"><div class="cap-num">1</div><div class="cap-text"><strong>Hook:</strong> one bold line that earns the click to "see more"</div></div>
+          <div class="cap-row"><div class="cap-num">2</div><div class="cap-text"><strong>Context:</strong> 2 lines of what's happening and why it matters</div></div>
+          <div class="cap-row"><div class="cap-num">3</div><div class="cap-text"><strong>Insight:</strong> what the reader takes away</div></div>
+          <div class="cap-row"><div class="cap-num">4</div><div class="cap-text"><strong>CTA:</strong> one direct ask: comment, DM, follow, share</div></div>
+          <div class="cap-row"><div class="cap-num">5</div><div class="cap-text"><strong>3-5 Hashtags:</strong> no keyword dumps, no square brackets</div></div>
         </div>
       </div>
 
       <div class="ic">
         <div class="ic-top"><div class="ic-ico r">&#127912;</div><h4>No Visual Brand System</h4></div>
-        <p>Six distinct font styles appear across 21 posts. Backgrounds go from sky blue to pitch black to red sandstone to white. Logo placement shifts corner to corner. The Earth Day post uses a cursive script seen nowhere else. A viewer cannot identify a SolarYaan post in 1 second because nothing is consistent enough to hold onto.</p>
-        <div class="fix"><span class="fix-tag">Fix</span><p>Lock in 2 colors (orange #F5820A + navy #0A1E3D), 1 headline font, 1 body font, logo always bottom-right. Build 5 templates and never deviate.</p></div>
+        <p>Six distinct font styles across 21 posts. Backgrounds shift from sky blue to pitch black to red sandstone. Logo placement changes every post. A viewer cannot identify a SolarYaan post in 1 second.</p>
+        <div class="fix"><span class="fix-tag">Fix</span><p>Lock in 2 colors, 1 headline font, 1 body font, logo always bottom-right. Build 5 templates and never deviate.</p></div>
       </div>
 
       <div class="ic">
         <div class="ic-top"><div class="ic-ico a">&#128279;</div><h4>Page Setup Fails the First Impression</h4></div>
-        <p>The company description is two vague sentences. The tagline "Lets Connect With Nature!!!" has a grammar error and sounds like a lifestyle app, not a B2B inverter manufacturer. The website points to howd.in, which is unrelated to SolarYaan. Any serious procurement decision-maker landing here will leave without reaching out.</p>
-        <div class="fix"><span class="fix-tag">Fix</span><p>Rewrite About with products, geography, USP, and a follow CTA. Fix website URL. Fix the tagline apostrophe. Today.</p></div>
+        <p>The company description is two vague sentences. The tagline "Lets Connect With Nature!!!" has a grammar error and sounds like a lifestyle app. The website URL points to howd.in, which is unrelated to SolarYaan.</p>
+        <div class="fix"><span class="fix-tag">Fix</span><p>Rewrite About with products, geography, USP, and a follow CTA. Fix the website URL and tagline apostrophe.</p></div>
       </div>
 
       <div class="ic">
         <div class="ic-top"><div class="ic-ico r">&#128247;</div><h4>57% of Posts Were About One Expo</h4></div>
-        <p>In a single month, 13 out of 21 posts were about RenewX — countdowns, Day 1, Day 2, recaps, highlight reels. Every post used the same structure. By Day 3 the audience had tuned out completely. The categories that drive real engagement — customer stories, CEO voice, education — had near-zero representation.</p>
-        <div class="fix"><span class="fix-tag">Fix</span><p>Max 3 posts per event. Apply the 7-pillar content calendar going forward (see Action Plan).</p></div>
+        <p>13 of 21 posts in a single month were about RenewX: countdowns, Day 1, Day 2, recaps, all same structure. Customer stories, CEO voice, and education had near-zero representation.</p>
+        <div class="fix"><span class="fix-tag">Fix</span><p>Max 3 posts per event. Apply the 7-pillar content calendar going forward.</p></div>
       </div>
 
       <div class="ic">
         <div class="ic-top"><div class="ic-ico a">&#128203;</div><h4>The IPO Got 12 Likes</h4></div>
-        <p>SolarYaan is heading for an IPO. That is a massive brand moment. The post announcing it got 12 likes because it was written as a detached observer commenting on their own news: "It's inspiring to see a Gujarat-based brand scaling up..." — written as if they were watching someone else's IPO. No founder voice. No emotion. No story.</p>
-        <div class="fix"><span class="fix-tag">Fix</span><p>Write a first-person post from the founder. Tell the real story: why they started, what 5 years of building looks like, what the IPO means for the team. That post will do 200+ likes easily.</p></div>
+        <p>The IPO announcement post got 12 likes. It was written as a detached observer: "It's inspiring to see a Gujarat-based brand scaling up..." No founder voice. No emotion. No story.</p>
+        <div class="fix"><span class="fix-tag">Fix</span><p>Write a first-person founder post. Why they started, what 5 years looks like, what the IPO means. That post will do 200+ likes.</p></div>
       </div>
 
       <div class="ic">
         <div class="ic-top"><div class="ic-ico r">&#128100;</div><h4>Brand Name Has 3 Spellings</h4></div>
-        <p>"SolarYaan", "Solar Yaan", and "Solar yaan" all appear across posts published in the same month. This is a basic editorial error that signals no review process is in place before publishing.</p>
+        <p>"SolarYaan", "Solar Yaan", and "Solar yaan" all appear in the same month. No review process before publishing.</p>
         <div class="fix"><span class="fix-tag">Fix</span><p>Decide on "SolarYaan" and add it to every post template. One brand name. No exceptions.</p></div>
       </div>
 
@@ -656,12 +735,12 @@
         <div class="ic-top"><div class="ic-ico a">&#128200;</div><h4>Content Mix Is Heavily Skewed</h4></div>
         <div class="mix">
           <div class="mix-col">
-            <h4>Current Mix (April-May 2026)</h4>
+            <h4>Current Mix (Apr–May 2026)</h4>
             <div class="mi"><span class="mi-lbl">RenewX event posts</span><div class="mi-bar"><div class="mi-fill" style="width:100%;background:#D93025"></div></div><span class="mi-pct">57%</span></div>
             <div class="mi"><span class="mi-lbl">Product / Technical</span><div class="mi-bar"><div class="mi-fill" style="width:30%;background:#C07000"></div></div><span class="mi-pct">17%</span></div>
             <div class="mi"><span class="mi-lbl">CEO / Leadership</span><div class="mi-bar"><div class="mi-fill" style="width:17%;background:var(--sky)"></div></div><span class="mi-pct">9%</span></div>
             <div class="mi"><span class="mi-lbl">People / Culture</span><div class="mi-bar"><div class="mi-fill" style="width:7%;background:var(--green)"></div></div><span class="mi-pct">4%</span></div>
-            <div class="mi"><span class="mi-lbl">Festival / Occasion</span><div class="mi-bar"><div class="mi-fill" style="width:13%;background:var(--orange)"></div></div><span class="mi-pct">9%</span></div>
+            <div class="mi"><span class="mi-lbl">Festival / Occasion</span><div class="mi-bar"><div class="mi-fill" style="width:16%;background:var(--orange)"></div></div><span class="mi-pct">9%</span></div>
             <div class="mi"><span class="mi-lbl">Industry insight</span><div class="mi-bar"><div class="mi-fill" style="width:7%;background:var(--navy)"></div></div><span class="mi-pct">4%</span></div>
           </div>
           <div class="mix-col">
@@ -677,62 +756,79 @@
 
     </div>
 
-    <!-- WHAT COULD GO RIGHT -->
+    <!-- PART 2: XTO VALUE PROP -->
+    <div class="xto-value">
+      <div class="xto-value-left">
+        <div class="xto-eyebrow">Part 2: Where xto100x Comes In</div>
+        <h3>SolarYaan has the story.<br>xto100x builds the system to tell it.</h3>
+        <p>We write every caption, design every post, script every CEO video, and deliver a content calendar a month in advance. SolarYaan approves and posts. No guesswork, no keyword dumps.</p>
+      </div>
+      <div class="xto-grid">
+        <div class="xto-card"><div class="xc-title">Content</div><div class="xc-sub">Written, structured, on-brand every post</div></div>
+        <div class="xto-card"><div class="xc-title">Design</div><div class="xc-sub">Templated, visual, recognizable brand</div></div>
+        <div class="xto-card"><div class="xc-title">Strategy</div><div class="xc-sub">Monthly calendar, mix audited weekly</div></div>
+        <div class="xto-card"><div class="xc-title">Growth</div><div class="xc-sub">5K to 25K followers in 6 months</div></div>
+      </div>
+    </div>
+
+    <!-- PART 2: WHAT'S WORKING -->
     <div class="sh">
-      <div class="sh-num g">+</div>
-      <div class="sh-text"><h2>What They Could Do Right — and Where xto100x Comes In</h2><p>The opportunities already on the table. xto100x provides the system, the design, and the content to execute them.</p></div>
+      <div class="sh-icon g">&#43;</div>
+      <div class="sh-text"><h2>What xto100x Builds On</h2><p>Signals already in the data</p></div>
+      <div class="sh-rule"></div>
     </div>
     <div class="wg">
       <div class="wc">
         <div class="wn-wrap"><div class="wn">264</div><span class="wn-lbl">likes</span></div>
         <h4>New Hire Post Broke the Record</h4>
-        <p>Ms. Aparna Dey's welcome post got 264 likes and 31 comments, 6 to 22 times more than product or event posts. Human stories are the highest-leverage content type on this page by a huge margin.</p>
-        <div class="tip">&#8594; xto100x writes and designs one people post every week, built to hit this number consistently</div>
+        <p>Ms. Aparna Dey's welcome post got 264 likes and 31 comments. 6 to 22 times more than any product or event post. Human stories are the highest-leverage content type on this page.</p>
+        <div class="tip">xto100x writes and designs one people post every week, built to hit this number consistently</div>
       </div>
       <div class="wc">
         <div class="wn-wrap"><div class="wn">66</div><span class="wn-lbl">likes</span></div>
         <h4>CEO Face-to-Camera Videos Win Every Time</h4>
-        <p>Both CEO invite videos (Manoj Patel: 66 likes, 8 reposts / Chirag Patel: 55 likes, 5 reposts) outperformed every product post. The pattern is consistent and proven. Leadership video is SolarYaan's single biggest untapped lever.</p>
-        <div class="tip">&#8594; xto100x scripts, briefs, and produces one CEO video per week — the founders just show up and talk</div>
+        <p>Both CEO videos outperformed every product post. Manoj: 66 likes, 8 reposts. Chirag: 55 likes, 5 reposts. Leadership video is the single biggest untapped lever.</p>
+        <div class="tip">xto100x scripts and briefs one CEO video per week. The founders show up and talk.</div>
       </div>
       <div class="wc">
         <div class="wn-wrap"><div class="wn">8</div><span class="wn-lbl">reposts</span></div>
         <h4>Tagging People Multiplies Reach</h4>
-        <p>Day 2 Multi-Photo with 6 team tags got 50 likes and 6 reposts. The similar Day 2 Recap without tags got 34 likes and 2 reposts. Tagging individuals consistently lifts distribution without any extra content effort.</p>
-        <div class="tip">&#8594; xto100x builds tagging into every post brief as a non-negotiable step</div>
+        <p>Day 2 multi-photo with 6 team tags: 50 likes, 6 reposts. Without tags: 34 likes, 2 reposts. Tagging individuals consistently lifts distribution.</p>
+        <div class="tip">xto100x builds tagging into every post brief as a non-negotiable step</div>
       </div>
       <div class="wc">
         <div class="wn-wrap"><div class="wn">39</div><span class="wn-lbl">likes</span></div>
         <h4>Tutorial Videos Get Reposted by Dealers</h4>
-        <p>Installation guides generate consistent 5 reposts, driven by installers and dealers sharing to their own networks. This is a distribution channel SolarYaan is activating without even realizing it.</p>
-        <div class="tip">&#8594; xto100x brands the thumbnails, writes the captions, and makes every tutorial a dealer-ready share</div>
+        <p>Installation guides average 5 reposts, driven by installers and dealers sharing to their own networks. A distribution channel already working without a strategy behind it.</p>
+        <div class="tip">xto100x brands the thumbnails, writes the captions, and makes every tutorial a dealer-ready share</div>
       </div>
       <div class="wc">
         <div class="wn-wrap"><div class="wn">4-5</div><span class="wn-lbl">posts/wk</span></div>
         <h4>Consistent Posting Cadence</h4>
-        <p>4-5 posts per week is solid for a B2B company of this size. Most competitors post once a week. The discipline is there. It just needs a content strategy behind it.</p>
-        <div class="tip">&#8594; xto100x provides the content calendar so every post slot is planned, written, and designed in advance</div>
+        <p>4-5 posts per week is solid for a B2B company of this size. Most competitors post once a week. The discipline is there. It needs a content strategy behind it.</p>
+        <div class="tip">xto100x provides the content calendar so every post slot is planned, written, and designed in advance</div>
       </div>
       <div class="wc">
         <div class="wn-wrap"><div class="wn">IPO</div><span class="wn-lbl">moment</span></div>
         <h4>Exceptional Story Material Available</h4>
-        <p>An IPO, a CEO with real market insights about BESS and Tier 2 markets, tutorial content that dealers share, and national expo presence. The raw material for a 25K-follower page is already here. Only the execution is missing.</p>
-        <div class="tip">&#8594; xto100x is the execution layer. The story is already here.</div>
+        <p>An IPO, a CEO with real insights on BESS and Tier 2 markets, tutorials dealers already share, national expo presence. Raw material for a 25K-follower page is already here.</p>
+        <div class="tip">xto100x is the execution layer. The story is already here.</div>
       </div>
     </div>
 
     <!-- PERFORMANCE TABLE -->
-    <div class="sh" style="margin-bottom:18px">
-      <div class="sh-num b">&#126;</div>
-      <div class="sh-text"><h2>Last 30-Day Post Performance</h2><p>All 21 posts analyzed, ranked by engagement. CEO and people content dominate.</p></div>
+    <div class="sh" style="margin-bottom:20px">
+      <div class="sh-icon b">&#8764;</div>
+      <div class="sh-text"><h2>Post Performance: Apr 11 – May 11, 2026</h2><p>All 21 posts: CEO and people content dominate</p></div>
+      <div class="sh-rule"></div>
     </div>
     <div class="tbl-wrap">
       <table class="tbl">
         <thead><tr><th>Post</th><th>Type</th><th>Likes</th><th>Reposts</th><th>Comments</th><th>Signal</th></tr></thead>
         <tbody>
           <tr><td><strong>New Hire: Aparna Dey (Head HRBP)</strong></td><td>People</td><td><strong>264</strong></td><td>1</td><td>31</td><td class="ph">&#9650; Standout</td></tr>
-          <tr><td>CEO Invite Video (Manoj Patel)</td><td>CEO Video</td><td><strong>66</strong></td><td>8</td><td>—</td><td class="ph">&#9650; High</td></tr>
           <tr><td>RenewX Day 1 Recap</td><td>Event</td><td>67</td><td>5</td><td>—</td><td class="ph">&#9650; High</td></tr>
+          <tr><td>CEO Invite Video (Manoj Patel)</td><td>CEO Video</td><td>66</td><td>8</td><td>—</td><td class="ph">&#9650; High</td></tr>
           <tr><td>CEO Invite Video (Chirag Patel)</td><td>CEO Video</td><td>55</td><td>5</td><td>—</td><td class="ph">&#9650; High</td></tr>
           <tr><td>Chennai Event Invite</td><td>Event</td><td>50</td><td>7</td><td>—</td><td class="ph">&#9650; High</td></tr>
           <tr><td>RenewX Day 2 Multi-Photo (6 tags)</td><td>Event</td><td>50</td><td>6</td><td>—</td><td class="ph">&#9650; High</td></tr>
@@ -743,305 +839,223 @@
           <tr><td>Meter + CTs Tutorial Video</td><td>Product Video</td><td>33</td><td>3</td><td>—</td><td class="pm">&#9654; Mid</td></tr>
           <tr><td>RenewX Day 2 Recap</td><td>Event</td><td>34</td><td>2</td><td>—</td><td class="pm">&#9654; Mid</td></tr>
           <tr><td>SYH Series Install Guide</td><td>Product Video</td><td>28</td><td>1</td><td>—</td><td class="pm">&#9654; Mid</td></tr>
+          <tr><td>CEO Committee (Gujarat SPL)</td><td>Leadership</td><td>27</td><td>1</td><td>—</td><td class="pl">&#9660; Low</td></tr>
           <tr><td>5-Day Countdown</td><td>Teaser</td><td>24</td><td>5</td><td>—</td><td class="pl">&#9660; Low</td></tr>
           <tr><td>International Labour Day</td><td>Festival</td><td>22</td><td>2</td><td>—</td><td class="pl">&#9660; Low</td></tr>
+          <tr><td>AIO 3H-10H Install Video</td><td>Product Video</td><td>19</td><td>—</td><td>—</td><td class="pl">&#9660; Low</td></tr>
           <tr><td>3-Day Countdown</td><td>Teaser</td><td>16</td><td>1</td><td>—</td><td class="pl">&#9660; Low</td></tr>
           <tr><td>World Earth Day</td><td>Festival</td><td>13</td><td>2</td><td>—</td><td class="pl">&#9660; Low</td></tr>
-          <tr><td>CEO Committee (Gujarat SPL)</td><td>Leadership</td><td>27</td><td>1</td><td>—</td><td class="pl">&#9660; Low</td></tr>
           <tr><td><strong>IPO Announcement</strong></td><td>Company News</td><td><strong>12</strong></td><td>—</td><td>—</td><td class="pl">&#9660; Missed</td></tr>
           <tr><td>Saur Energy Insight Repost</td><td>Industry</td><td>12</td><td>—</td><td>—</td><td class="pl">&#9660; Low</td></tr>
-          <tr><td>AIO 3H-10H Install Video</td><td>Product Video</td><td>19</td><td>—</td><td>—</td><td class="pl">&#9660; Low</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- XTO100X VALUE PROP -->
-    <div style="background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-radius:18px;padding:28px 32px;margin-bottom:48px;display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;">
-      <div style="flex:1;min-width:220px;">
-        <div style="font-family:var(--font-head);font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">What xto100x Brings</div>
-        <h3 style="font-family:var(--font-head);font-size:20px;font-weight:800;color:#fff;line-height:1.25;margin-bottom:12px;">SolarYaan has the story.<br>xto100x builds the system to tell it.</h3>
-        <p style="font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.75;">We write every caption, design every post, script every CEO video, and deliver a content calendar a month in advance. SolarYaan's team approves and posts. No guesswork, no keyword dumps, no wasted potential.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0;min-width:260px;">
-        <div style="background:rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;border:1px solid rgba(245,130,10,0.2);">
-          <div style="font-family:var(--font-head);font-size:22px;font-weight:900;color:var(--orange);line-height:1;">Content</div>
-          <div style="font-size:11.5px;color:rgba(255,255,255,0.5);margin-top:4px;">Written, structured, on-brand</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;border:1px solid rgba(245,130,10,0.2);">
-          <div style="font-family:var(--font-head);font-size:22px;font-weight:900;color:var(--orange);line-height:1;">Design</div>
-          <div style="font-size:11.5px;color:rgba(255,255,255,0.5);margin-top:4px;">Templated, visual, recognizable</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;border:1px solid rgba(245,130,10,0.2);">
-          <div style="font-family:var(--font-head);font-size:22px;font-weight:900;color:var(--orange);line-height:1;">Strategy</div>
-          <div style="font-size:11.5px;color:rgba(255,255,255,0.5);margin-top:4px;">Monthly calendar, mix audited</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;border:1px solid rgba(245,130,10,0.2);">
-          <div style="font-family:var(--font-head);font-size:22px;font-weight:900;color:var(--orange);line-height:1;">Growth</div>
-          <div style="font-size:11.5px;color:rgba(255,255,255,0.5);margin-top:4px;">5K to 25K in 6 months</div>
-        </div>
-      </div>
-    </div>
-
     <!-- ACTION PLAN -->
-    <div class="sh" style="margin-bottom:18px">
-      <div class="sh-num o">&#9654;</div>
-      <div class="sh-text"><h2>The xto100x Execution Plan</h2><p>What xto100x does in three phases to take SolarYaan from 5K to 25K followers in 6 months</p></div>
+    <div class="sh" style="margin-bottom:22px">
+      <div class="sh-icon o">&#9654;</div>
+      <div class="sh-text"><h2>The xto100x Execution Plan</h2><p>5K to 25K followers in 6 months</p></div>
+      <div class="sh-rule"></div>
     </div>
     <div class="pg">
       <div class="pc">
-        <div class="pc-hd p1">Phase 1 — xto100x Fixes the Foundation<br>Week 1</div>
+        <div class="pc-hd p1">Phase 1: Fix the Foundation<br>Week 1</div>
         <div class="pc-body">
           <div class="pi"><div class="pid" style="background:var(--navy)"></div><p>xto100x rewrites the company description with products, geography, USP, and a follow CTA</p></div>
           <div class="pi"><div class="pid" style="background:var(--navy)"></div><p>Fix website URL, fix the tagline apostrophe, lock "SolarYaan" spelling across all channels</p></div>
-          <div class="pi"><div class="pid" style="background:var(--navy)"></div><p>Remove all square-bracket keyword dumps; xto100x builds a proper caption review checklist</p></div>
-          <div class="pi"><div class="pid" style="background:var(--navy)"></div><p>xto100x writes the IPO story in the founder's own voice and prepares it for posting</p></div>
+          <div class="pi"><div class="pid" style="background:var(--navy)"></div><p>Remove all keyword dumps; xto100x builds a caption review checklist</p></div>
+          <div class="pi"><div class="pid" style="background:var(--navy)"></div><p>xto100x writes the IPO story in the founder's own voice, ready to post</p></div>
           <div class="pi"><div class="pid" style="background:var(--navy)"></div><p>Draft employee activation email for the 200-500 team to add SolarYaan to their LinkedIn profiles</p></div>
         </div>
       </div>
       <div class="pc">
-        <div class="pc-hd p2">Phase 2 — xto100x Builds the System<br>Week 2-3</div>
+        <div class="pc-hd p2">Phase 2: Build the System<br>Week 2-3</div>
         <div class="pc-body">
           <div class="pi"><div class="pid" style="background:var(--green)"></div><p>xto100x designs and locks the full brand kit: orange + navy, Montserrat headlines, 5 post templates, logo bottom-right always</p></div>
-          <div class="pi"><div class="pid" style="background:var(--green)"></div><p>xto100x writes every caption using Hook + Context + Insight + CTA structure — no more keyword dumps</p></div>
-          <div class="pi"><div class="pid" style="background:var(--green)"></div><p>First customer installation story produced: real state, real kW numbers, real project</p></div>
-          <div class="pi"><div class="pid" style="background:var(--green)"></div><p>Script and brief the CEO for a 60-second industry take video — xto100x handles the post production</p></div>
-          <div class="pi"><div class="pid" style="background:var(--green)"></div><p>xto100x delivers a monthly content calendar with post-by-post briefs so the team always knows what's going out next</p></div>
+          <div class="pi"><div class="pid" style="background:var(--green)"></div><p>xto100x writes every caption using Hook + Context + Insight + CTA structure</p></div>
+          <div class="pi"><div class="pid" style="background:var(--green)"></div><p>First customer installation story: real state, real kW numbers, real project</p></div>
+          <div class="pi"><div class="pid" style="background:var(--green)"></div><p>Script and brief the CEO for a 60-second industry take; xto100x handles post production</p></div>
+          <div class="pi"><div class="pid" style="background:var(--green)"></div><p>Deliver the first monthly content calendar with post-by-post briefs</p></div>
         </div>
       </div>
       <div class="pc">
-        <div class="pc-hd p3">Phase 3 — xto100x Grows the Audience<br>Month 2 Onward</div>
+        <div class="pc-hd p3">Phase 3: Grow the Audience<br>Month 2 Onward</div>
         <div class="pc-body">
-          <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>xto100x produces "SolarYaan Explains": 60-second reel series, one solar question per episode, scripted and branded</p></div>
+          <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>xto100x produces "SolarYaan Explains": 60-second reel series, scripted and branded</p></div>
           <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>Weekly CEO post: xto100x ghostwrites Chirag or Manoj sharing a real take on India's energy transition</p></div>
-          <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>"Projects We're Proud Of": xto100x formats one real install per week — state, kW, story, visual</p></div>
-          <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>xto100x turns the Chirag BESS/Tier 2 insight into a full standalone thought leadership post</p></div>
-          <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>All video thumbnails branded, subtitles added, event recaps cut to under 90 seconds — xto100x handles all post-production</p></div>
+          <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>"Projects We're Proud Of": xto100x formats one real install per week: state, kW, story, visual</p></div>
+          <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>Chirag BESS/Tier 2 insight turned into a full standalone thought leadership post</p></div>
+          <div class="pi"><div class="pid" style="background:var(--orange)"></div><p>All video thumbnails branded, subtitles added, event recaps cut to under 90 seconds</p></div>
         </div>
       </div>
     </div>
 
   </div>
-</div>
+</div><!-- /page-audit -->
 
-<!-- ══════════════════════════
+<!-- ══════════════════════════════
      COMPARE PAGE
-══════════════════════════ -->
+══════════════════════════════ -->
 <div id="page-compare" class="page active">
 
   <div class="c-hero">
-    <div class="c-eyebrow"><span style="width:6px;height:6px;background:var(--orange);border-radius:50%;display:inline-block;flex-shrink:0"></span> Creative Redesign</div>
-    <h1><span class="orange">xto100x</span> x SolarYaan</h1>
-    <p>SolarYaan's original posts side-by-side with xto100x redesigns. Same content, dramatically better execution.</p>
+    <div class="c-eyebrow"><span style="width:7px;height:7px;background:var(--orange);border-radius:50%;display:inline-block;flex-shrink:0"></span>Creative Redesign</div>
+    <h1><span class="o">xto100x</span> x SolarYaan</h1>
+    <p>SolarYaan originals side-by-side with xto100x redesigns. Same content, better execution.</p>
     <div class="c-pills">
-      <div class="cp orange">xto100x Redesigns</div>
-      <div class="cp">2 Leadership Posts</div>
-      <div class="cp">1 Expo Post</div>
-      <div class="cp">SolarYaan</div>
+      <div class="cp o">xto100x Redesigns</div>
+      <div class="cp">HR Onboarding Post 1</div>
+      <div class="cp">HR Onboarding Post 2</div>
+      <div class="cp">Expo Post</div>
     </div>
   </div>
 
   <div class="itabs">
     <button class="itb" onclick="showPane('ov-pane',this)">Overview</button>
-    <button class="itb active" onclick="showPane('l1-pane',this)">Leadership Post 1</button>
-    <button class="itb" onclick="showPane('l2-pane',this)">Leadership Post 2</button>
-    <button class="itb" onclick="showPane('e1-pane',this)">Expo Post</button>
+    <button class="itb active" onclick="showPane('hr1-pane',this)">HR Onboarding Post 1</button>
+    <button class="itb" onclick="showPane('hr2-pane',this)">HR Onboarding Post 2</button>
+    <button class="itb" onclick="showPane('expo-pane',this)">Expo Post</button>
   </div>
 
   <!-- OVERVIEW -->
   <div id="ov-pane" class="pane">
-    <div class="p-intro"><h2>What xto100x Delivered</h2><p>Three redesigns showing what SolarYaan's content looks like when it has a real design system behind it.</p></div>
+    <div class="p-intro">
+      <h2>What xto100x Delivered</h2>
+      <p>Three posts redesigned, showing what SolarYaan's content looks like with a real design system behind it.</p>
+    </div>
     <div class="ov-stats">
-      <div class="os"><div class="n">3<em>+</em></div><div class="l">Redesigned creatives</div></div>
-      <div class="os"><div class="n">264</div><div class="l">Likes on original top post</div></div>
-      <div class="os"><div class="n">2<em>x</em></div><div class="l">Expected engagement lift</div></div>
+      <div class="os"><div class="n">3</div><div class="l">Posts redesigned</div></div>
+      <div class="os"><div class="n">264</div><div class="l">Likes on the original top post</div></div>
+      <div class="os"><div class="n">7</div><div class="l">Design elements improved</div></div>
     </div>
     <div class="ov-tbl-wrap">
       <table class="ov-tbl">
         <thead><tr><th>Design Element</th><th>SolarYaan Original</th><th>xto100x Redesign</th></tr></thead>
         <tbody>
-          <tr><td><strong>Visual Identity</strong></td><td><span class="tb">No consistent system</span></td><td><span class="ta">Orange + navy brand kit, locked</span></td></tr>
-          <tr><td><strong>Typography</strong></td><td><span class="tb">6 different font styles</span></td><td><span class="ta">Montserrat bold + Inter, always</span></td></tr>
-          <tr><td><strong>Logo Placement</strong></td><td><span class="tb">Random corner, random size</span></td><td><span class="ta">Top-left, consistent size and padding</span></td></tr>
-          <tr><td><strong>Color Usage</strong></td><td><span class="tb">Every background color different</span></td><td><span class="ta">Orange accent on navy/white — always</span></td></tr>
-          <tr><td><strong>Person Photo</strong></td><td><span class="tb">Mixed with unrelated graphic elements</span></td><td><span class="ta">Full bleed, clean crop, brand frame</span></td></tr>
-          <tr><td><strong>Hierarchy</strong></td><td><span class="tb">No clear headline/body distinction</span></td><td><span class="ta">Bold headline, clear role label, body copy</span></td></tr>
-          <tr><td><strong>Expo Details</strong></td><td><span class="tb">Text-heavy, cluttered</span></td><td><span class="ta">Icon-paired date, stall, venue</span></td></tr>
+          <tr><td><strong>Visual Identity</strong></td><td><span class="tb">No consistent system</span></td><td><span class="tg">Orange + navy brand kit, locked</span></td></tr>
+          <tr><td><strong>Typography</strong></td><td><span class="tb">6 different font styles</span></td><td><span class="tg">Montserrat headings + Poppins body, always</span></td></tr>
+          <tr><td><strong>Logo Placement</strong></td><td><span class="tb">Random corner, random size</span></td><td><span class="tg">Top-left, consistent size and padding</span></td></tr>
+          <tr><td><strong>Color Usage</strong></td><td><span class="tb">Every background different</span></td><td><span class="tg">Orange accent on navy/white, always consistent</span></td></tr>
+          <tr><td><strong>Person Photo</strong></td><td><span class="tb">Mixed with unrelated graphic elements</span></td><td><span class="tg">Clean crop, brand frame, full bleed</span></td></tr>
+          <tr><td><strong>Hierarchy</strong></td><td><span class="tb">No clear headline/body distinction</span></td><td><span class="tg">Bold headline, clear role label, body copy</span></td></tr>
+          <tr><td><strong>CTA</strong></td><td><span class="tb">No call to action on any post</span></td><td><span class="tg">Branded CTA element on every design</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- LEADERSHIP 1 -->
-  <div id="l1-pane" class="pane active">
+  <!-- HR ONBOARDING POST 1 -->
+  <div id="hr1-pane" class="pane active">
     <div class="p-intro">
-      <h2>Leadership Post 1 — Welcome to the Team (v1)</h2>
-      <p>The original got 264 likes. With a proper design system, it would get more and build brand recognition at the same time.</p>
+      <h2>HR Onboarding Post 1</h2>
+      <p>SolarYaan original vs xto100x redesign v1. Bold leadership framing, script + sans typography, orange brand geometry.</p>
     </div>
     <div class="cc">
       <div class="cc-hd">
         <div class="cc-num">1</div>
         <div class="cc-hd-text">
-          <h3>New Hire: Ms. Aparna Dey — Head HRBP</h3>
-          <p>264 likes, 31 comments, 1 repost &nbsp;·&nbsp; Highest-performing post on the page</p>
+          <h3>Ms. Aparna Dey, Head HRBP</h3>
+          <p>SolarYaan Original / 264 likes, 31 comments / Highest-performing post on the page</p>
         </div>
       </div>
       <div class="cc-grid">
-        <div class="cc-orig">
+        <div class="cc-col cc-orig">
           <div class="lbl-orig"><span class="lbl-dot"></span>SolarYaan Original</div>
-          <img class="img-orig" src="sy-leadership-1.jpeg" alt="SolarYaan Welcome Post Original" />
+          <img class="img-orig" src="sy-hr-original.jpeg" alt="SolarYaan HR Onboarding Original" />
         </div>
-        <div class="cc-ours">
-          <div class="badge-row"><div class="lbl-ours"><span class="lbl-dot"></span>xto100x Redesign 1</div><span class="our-star">Our Work</span></div>
-          <img class="img-ours" src="xto-leadership-1.png" alt="xto100x Leadership Redesign 1" />
+        <div class="cc-col cc-ours">
+          <div class="badge-row">
+            <div class="lbl-ours"><span class="lbl-dot"></span>xto100x Redesign</div>
+            <span class="our-star">Our Work</span>
+          </div>
+          <img class="img-ours" src="xto-hr-1.png" alt="xto100x HR Onboarding Redesign v1" />
         </div>
       </div>
       <div class="diff-bar">
-        <h4>What xto100x Improved</h4>
+        <h4>What xto100x improved</h4>
         <div class="dg">
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Clean white base with brand accents</strong><span>Crisp white background with orange and navy accents replaces the flat blue gradient, matching SolarYaan's actual brand colors.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Bullet-point breakdown of credentials</strong><span>Aparna's experience is structured as scannable bullets with orange highlights on key terms, making it easy to read in 5 seconds.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Stronger name hierarchy</strong><span>"Ms. Aparna Dey" is the visual anchor of the post. Role label sits cleanly below. The reader knows what this post is about in 1 second.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Branded "Welcome aboard!" CTA strip</strong><span>Orange pill button with team icon at the bottom converts the post from an announcement into an invitation for interaction.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Headline reframes the moment</strong><span>Original: "Welcome to the Team" in small text. Redesign: "Strengthening Our Leadership Team" in bold. A routine onboarding post becomes a company milestone.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Script + sans typography</strong><span>Original uses a single flat font throughout. The redesign layers an elegant script "Welcome" over the bold name, adding warmth and visual rhythm.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Brand geometry frames the photo</strong><span>Original: plain blue circle arc. Redesign: orange and navy geometric shapes that make the photo feel intentionally designed.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>"Welcome aboard!" CTA pill</strong><span>Original ends on body text. Redesign closes with an orange pill CTA, turning a passive announcement into a moment of interaction.</span></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- LEADERSHIP 2 — xto100x redesign v2 uses same original, different treatment -->
-  <div id="l2-pane" class="pane">
+  <!-- HR ONBOARDING POST 2 -->
+  <div id="hr2-pane" class="pane">
     <div class="p-intro">
-      <h2>Leadership Post 2 — Welcome to the Team (v2)</h2>
-      <p>A bolder alternate layout for the same new hire post. Stronger photo treatment, darker brand palette, higher visual impact.</p>
+      <h2>HR Onboarding Post 2</h2>
+      <p>SolarYaan original vs xto100x redesign v2. Structured credential list, orange highlights, full-bleed photo, bold CTA footer.</p>
     </div>
     <div class="cc">
       <div class="cc-hd">
         <div class="cc-num">2</div>
         <div class="cc-hd-text">
-          <h3>New Hire: Ms. Aparna Dey — Alt. Layout</h3>
-          <p>Second xto100x take — full-bleed photo, navy left panel, orange accents throughout</p>
+          <h3>Ms. Aparna Dey, Head HRBP</h3>
+          <p>Alternate layout: scannable credential list, full-bleed photo treatment, orange footer CTA</p>
         </div>
       </div>
       <div class="cc-grid">
-        <div class="cc-orig">
+        <div class="cc-col cc-orig">
           <div class="lbl-orig"><span class="lbl-dot"></span>SolarYaan Original</div>
-          <img class="img-orig" src="sy-leadership-1.jpeg" alt="SolarYaan Welcome Post Original" />
+          <img class="img-orig" src="sy-hr-original.jpeg" alt="SolarYaan HR Onboarding Original" />
         </div>
-        <div class="cc-ours">
-          <!-- Designed card using pure CSS since no second image file -->
-          <div class="badge-row"><div class="lbl-ours"><span class="lbl-dot"></span>xto100x Redesign 2</div><span class="our-star">Our Work</span></div>
-          <div style="background:linear-gradient(135deg,#0A1E3D 0%,#142C55 100%);border-radius:13px;border:2.5px solid var(--orange);box-shadow:0 0 0 5px rgba(245,130,10,0.1),0 10px 36px rgba(10,30,61,0.18);overflow:hidden;font-family:'Montserrat',sans-serif;">
-            <!-- Top bar -->
-            <div style="background:var(--orange);padding:8px 20px;display:flex;align-items:center;gap:10px;">
-              <div style="font-size:10px;font-weight:700;color:#fff;letter-spacing:0.1em;text-transform:uppercase;">Welcome to the Team</div>
-            </div>
-            <!-- Logo row -->
-            <div style="padding:16px 20px 0;display:flex;align-items:center;gap:8px;">
-              <svg width="70" height="30" viewBox="0 0 160 50" fill="none"><text x="0" y="20" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="17" fill="#ffffff">SOLAR</text><text x="0" y="38" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="17" fill="#F5820A" letter-spacing="1">YAAN</text></svg>
-            </div>
-            <!-- Name block -->
-            <div style="padding:14px 20px 10px;">
-              <div style="font-size:26px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-0.02em;">Ms. Aparna Dey</div>
-              <div style="font-size:13px;font-weight:600;color:var(--orange);margin-top:4px;">Head — HRBP</div>
-              <div style="width:40px;height:3px;background:var(--orange);border-radius:2px;margin-top:10px;"></div>
-            </div>
-            <!-- Bullets -->
-            <div style="padding:6px 20px 16px;">
-              <div style="font-size:11.5px;color:rgba(255,255,255,0.55);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">About Aparna</div>
-              <div style="font-size:12px;color:rgba(255,255,255,0.82);line-height:1.7;">&#11044; <span style="color:#FFB054;font-weight:700;">17+ years</span> of HR leadership<br/>&#11044; Expert in talent strategy &amp; business partnering<br/>&#11044; Champion of <span style="color:#FFB054;font-weight:700;">people-first</span> culture<br/>&#11044; Driving scalable growth at SolarYaan</div>
-            </div>
-            <!-- Footer -->
-            <div style="background:rgba(245,130,10,0.15);border-top:1px solid rgba(245,130,10,0.25);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;">
-              <div style="font-size:11px;font-weight:700;color:var(--orange);">Welcome aboard, Aparna!</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.35);">SolarYaan &middot; 2026</div>
-            </div>
+        <div class="cc-col cc-ours">
+          <div class="badge-row">
+            <div class="lbl-ours"><span class="lbl-dot"></span>xto100x Redesign</div>
+            <span class="our-star">Our Work</span>
           </div>
+          <img class="img-ours" src="xto-hr-2.png" alt="xto100x HR Onboarding Redesign v2" />
         </div>
       </div>
       <div class="diff-bar">
-        <h4>What xto100x Improved</h4>
+        <h4>What xto100x improved</h4>
         <div class="dg">
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Full navy brand immersion</strong><span>Dark navy background with orange accents makes this unmistakably SolarYaan. Every element reinforces the brand palette.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Orange top bar sets instant context</strong><span>"Welcome to the Team" in orange immediately tells the viewer what kind of post this is before they read anything else.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Key terms highlighted in orange</strong><span>"17+ years" and "people-first" stand out in brand orange against the white text, guiding the reader's eye to the most important credentials.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Footer with warmth and brand ownership</strong><span>Warm closing strip with "Welcome aboard, Aparna!" reinforces human tone while the SolarYaan stamp at the end ties it back to the brand.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>"About Aparna" credential section</strong><span>Original buries everything in a dense paragraph. Redesign breaks it into 5 scannable bullets under a header with an icon. Readable in 3 seconds.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Orange highlights on key credentials</strong><span>"17+ years" and "people-first" in orange. The eye lands on the most impressive points without reading every word.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Full-bleed photo, clean crop</strong><span>Original constrains the photo in a circle on a flat blue background. Redesign uses a natural bleed crop that feels editorial and premium.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Orange footer CTA strip</strong><span>Original ends on a paragraph with no CTA. Redesign closes with a bold orange footer with a team icon, giving the post a clear landing point.</span></div></div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- EXPO POST -->
-  <div id="e1-pane" class="pane">
+  <div id="expo-pane" class="pane">
     <div class="p-intro">
-      <h2>Expo Post — RenewX Chennai Original vs xto100x Redesign</h2>
-      <p>A structured, scannable expo invite that puts SolarYaan's identity first and makes the stall details impossible to miss.</p>
+      <h2>Expo Post: RenewX 2026, Chennai</h2>
+      <p>SolarYaan original expo invite vs xto100x redesign. Same information, completely different execution.</p>
     </div>
     <div class="cc">
       <div class="cc-hd">
         <div class="cc-num">3</div>
         <div class="cc-hd-text">
-          <h3>RenewX 2026 — Visit Our Stall at Hall 1, Stall A57</h3>
-          <p>27-28-29 April 2026 &nbsp;·&nbsp; Chennai Trade Centre, Chennai</p>
+          <h3>RenewX 2026: Visit Our Stall</h3>
+          <p>Hall 1, Stall A57 / 27-29 April 2026 / Chennai Trade Centre</p>
         </div>
       </div>
       <div class="cc-grid">
-        <div class="cc-orig">
+        <div class="cc-col cc-orig">
           <div class="lbl-orig"><span class="lbl-dot"></span>SolarYaan Original</div>
-          <img class="img-orig" src="sy-expo-original.jpeg" alt="SolarYaan Expo Original" />
+          <img class="img-orig" src="sy-expo-post.jpeg" alt="SolarYaan Expo Post Original" />
         </div>
-        <div class="cc-ours">
-          <div class="badge-row"><div class="lbl-ours"><span class="lbl-dot"></span>xto100x Redesign</div><span class="our-star">Our Work</span></div>
-          <!-- Designed expo card in pure CSS -->
-          <div style="background:var(--navy);border-radius:13px;border:2.5px solid var(--orange);box-shadow:0 0 0 5px rgba(245,130,10,0.1),0 10px 36px rgba(10,30,61,0.18);overflow:hidden;font-family:'Montserrat',sans-serif;transition:transform 0.3s,box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-5px) scale(1.012)';this.style.boxShadow='0 0 0 7px rgba(245,130,10,0.18),0 20px 52px rgba(10,30,61,0.2)'" onmouseout="this.style.transform='';this.style.boxShadow='0 0 0 5px rgba(245,130,10,0.1),0 10px 36px rgba(10,30,61,0.18)'">
-            <!-- Hero header -->
-            <div style="background:linear-gradient(135deg,#0A1E3D,#142C55);padding:24px 24px 18px;text-align:center;position:relative;">
-              <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;">SolarYaan at</div>
-              <div style="font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.01em;">RenewX 2026</div>
-              <div style="margin:10px auto 0;width:44px;height:3px;background:var(--orange);border-radius:2px;"></div>
-            </div>
-            <!-- Stall info cards -->
-            <div style="padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-              <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(245,130,10,0.2);border-radius:10px;padding:12px;text-align:center;">
-                <div style="font-size:18px;margin-bottom:4px;">&#127978;</div>
-                <div style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;">Hall</div>
-                <div style="font-size:20px;font-weight:900;color:#fff;line-height:1;">1</div>
-              </div>
-              <div style="background:rgba(245,130,10,0.12);border:1px solid rgba(245,130,10,0.3);border-radius:10px;padding:12px;text-align:center;">
-                <div style="font-size:18px;margin-bottom:4px;">&#127978;</div>
-                <div style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;">Stall No.</div>
-                <div style="font-size:20px;font-weight:900;color:var(--orange);line-height:1;">A57</div>
-              </div>
-            </div>
-            <!-- Date + Venue -->
-            <div style="padding:0 20px 16px;display:flex;flex-direction:column;gap:10px;">
-              <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border-radius:10px;padding:11px 14px;">
-                <span style="font-size:16px;">&#128197;</span>
-                <div>
-                  <div style="font-size:10px;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;">Dates</div>
-                  <div style="font-size:13px;font-weight:700;color:#fff;">27 - 28 - 29 April 2026</div>
-                </div>
-              </div>
-              <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border-radius:10px;padding:11px 14px;">
-                <span style="font-size:16px;">&#128205;</span>
-                <div>
-                  <div style="font-size:10px;color:rgba(255,255,255,0.4);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;">Venue</div>
-                  <div style="font-size:13px;font-weight:700;color:#fff;">Chennai Trade Centre, <span style="color:var(--orange);">Chennai</span></div>
-                </div>
-              </div>
-            </div>
-            <!-- Bottom bar -->
-            <div style="background:var(--orange);padding:12px 20px;text-align:center;">
-              <div style="font-size:12px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.08em;">Come Meet Us</div>
-            </div>
+        <div class="cc-col cc-ours">
+          <div class="badge-row">
+            <div class="lbl-ours"><span class="lbl-dot"></span>xto100x Redesign</div>
+            <span class="our-star">Our Work</span>
           </div>
+          <img class="img-ours" src="xto-expo-1.png" alt="xto100x Expo Redesign" />
         </div>
       </div>
       <div class="diff-bar">
-        <h4>What xto100x Improved</h4>
+        <h4>What xto100x improved</h4>
         <div class="dg">
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Hall + Stall as visual cards</strong><span>Hall 1 and Stall A57 are each given their own card, making the most important logistical details impossible to miss.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Icon-paired date and venue</strong><span>Calendar and pin icons let the viewer scan date and location in 2 seconds without reading a text paragraph.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Full navy brand environment</strong><span>The entire post lives in SolarYaan's brand colors. No stock stall photography competing with the information hierarchy.</span></div></div>
-          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Orange "Come Meet Us" CTA footer</strong><span>Clear call-to-action strip at the bottom tells the reader exactly what to do, turning a passive announcement into an active invitation.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>"We're Ready to Power What's Next"</strong><span>Original opens with "Visit Our Stall At": purely logistical. Redesign leads with a brand statement that creates excitement before the logistics even appear.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>3D product render replaces stall photo</strong><span>Original uses a stall photo: cluttered, dark, hard to scan. Redesign uses a clean 3D product render on white that shows the product line professionally.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>Icon-row logistics</strong><span>Original stacks stall, date, and venue into one bordered pill. Redesign gives each detail its own row with a dedicated icon. Scannable in 2 seconds.</span></div></div>
+          <div class="di"><div class="di-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div><strong>"Meet the SolarYaan Team" CTA footer</strong><span>Original ends on the venue name with no CTA. Redesign closes with a warm action-oriented footer strip.</span></div></div>
         </div>
       </div>
     </div>
@@ -1050,7 +1064,7 @@
 </div><!-- /page-compare -->
 
 <footer>
-  Prepared by <strong>xto100x</strong> for SolarYaan &nbsp;·&nbsp; LinkedIn Audit + Design Comparison &nbsp;·&nbsp; May 2026
+  Prepared by <strong>xto100x</strong> for SolarYaan / LinkedIn Audit + Design Comparison / May 2026
 </footer>
 
 <script>
